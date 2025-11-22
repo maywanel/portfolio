@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en" data-api-base="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Portfolio website for Mohamed El Messaadi, 42 Network student and aspiring cybersecurity engineer.">
+    <title>Mohamed El Messaadi · Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="icon" type="image/png" href="images/favicon/favicon.ico" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="images/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="images/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="site.webmanifest" />
+</head>
+<body>
+    <header class="hero" id="top">
+        <canvas id="heroCanvas" class="hero__canvas hero__canvas--hidden" aria-hidden="true"></canvas>
+        <button class="nav__toggle" id="themeToggle" aria-label="Toggle color theme">
+            <span class="nav__toggle-icon" aria-hidden="true"></span>
+        </button>
+        <h1 style="font-size: 150px;">Mohamed</h1>
+        <h1 style="font-size: 150px;">El Messaadi</h1>
+        <ul class="links">
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="hero__content">
+            <p class="hero__eyebrow">Software Engineering · Cybersecurity · 42 Network</p>
+            <h1>Crafting clean, scalable systems — one project at a time.</h1>
+            <p class="hero__subtitle">I'm Mohamed El Messaadi, a student at 42 Benguerir with a passion for cybersecurity, low‑level programming, system design, and building tools that help developers move faster.</p>
+            <div class="hero__actions">
+                <a class="button button--primary" href="#projects">View projects</a>
+                <a class="button button--ghost" href="https://github.com/maywanel" target="_blank" rel="noopener">GitHub</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="section about" id="about">
+            <div class="section__header">
+                <span class="section__eyebrow">About</span>
+                <h2>42 student · Problem‑solver · Always learning</h2>
+            </div>
+            <div class="about__grid">
+                <figure class="about__image">
+                    <img src="images/moel-mes.jpg" alt="Portrait of Mohamed El Messaadi">
+                </figure>
+                <div class="about__content">
+                    <p>I am a dedicated software engineering student at 42 Benguerir, where I focus on low‑level C programming, system architecture, and building reliable developer tools. I take pride in writing clean code, understanding how systems work under the hood, and continuously pushing my limits.</p>
+                    <p>Outside of coding, I enjoy basketball, exploring Linux systems (especially Arch), and diving into cybersecurity challenges and reverse engineering topics like angr.</p>
+                    <dl class="about__meta">
+                        <div>
+                            <dt>Location</dt>
+                            <dd>Morocco · Open to remote opportunities</dd>
+                        </div>
+                        <div>
+                            <dt>Focus Areas</dt>
+                            <dd>Low‑level C, Cybersecurity, DevOps, Full‑stack</dd>
+                        </div>
+                        <div>
+                            <dt>Currently</dt>
+                            <dd>Working on webserv & inception (42 Projects)</dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </section>
+
+        <section class="section skills" id="skills">
+            <div class="section__header">
+                <span class="section__eyebrow">Skills</span>
+                <h2>What I work with</h2>
+            </div>
+            <div class="skills__grid">
+                <article class="card">
+                    <h3>Languages</h3>
+                    <p>C, C++, Java, SQL, Bash</p>
+                </article>
+                <article class="card">
+                    <h3>Frameworks & Libraries</h3>
+                    <p>Spring Boot, React</p>
+                </article>
+                <article class="card">
+                    <h3>Cloud & DevOps</h3>
+                    <p>Docker, Kubernetes, GitHub Actions, CI/CD, Linux, Arch Linux</p>
+                </article>
+                <article class="card">
+                    <h3>Cybersecurity</h3>
+                    <p>Reverse engineering basics, angr, system security fundamentals</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="section experience" id="experience">
+            <div class="section__header">
+                <span class="section__eyebrow">Experience</span>
+                <h2>My journey so far</h2>
+            </div>
+            <div class="timeline">
+                <article class="timeline__item">
+                    <time>2024 · Present</time>
+                    <div>
+                        <h3>42 Benguerir · Software Engineering Student</h3>
+                        <p>Progressing through the 42 Common Core, building projects in C, Unix, threading, networking, OOP, and system design.</p>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="section projects" id="projects">
+            <div class="section__header">
+                <span class="section__eyebrow">Projects</span>
+                <h2>Highlighted work</h2>
+                <p class="section__intro">Some of my recent work from GitHub and the 42 curriculum.</p>
+            </div>
+            <div class="projects__grid" id="projectsGrid" data-fallback='[
+                {"name":"Minishell","description":"A fully functional UNIX shell implemented in C.","htmlUrl":"https://github.com/maywanel","language":"C","stars":0},
+                {"name":"Philosophers","description":"Dining philosophers solved with threading and synchronization.","htmlUrl":"https://github.com/maywanel","language":"C","stars":0},
+                {"name":"C# RPG Inventory GUI","description":"A cross‑platform inventory system using Avalonia UI.","htmlUrl":"https://github.com/maywanel","language":"C#","stars":5}
+            ]'>
+            </div>
+        </section>
+
+        <section class="section contact" id="contact">
+            <div class="section__header">
+                <span class="section__eyebrow">Contact</span>
+                <h2>Let’s build something great</h2>
+                <p class="section__intro">Reach out for collaborations, freelance work, or tech discussions.</p>
+            </div>
+            <div class="contact__grid">
+                <form class="contact__form" id="contactForm" novalidate>
+                    <div class="contact__form-group">
+                        <label for="contactName">Name</label>
+                        <input id="contactName" name="name" type="text" required maxlength="120" placeholder="Your name">
+                    </div>
+                    <div class="contact__form-group">
+                        <label for="contactEmail">Email</label>
+                        <input id="contactEmail" name="email" type="email" required maxlength="160" placeholder="you@example.com">
+                    </div>
+                    <div class="contact__form-group">
+                        <label for="contactMessage">Message</label>
+                        <textarea id="contactMessage" name="message" rows="4" required maxlength="5000" placeholder="Tell me about your idea"></textarea>
+                    </div>
+                    <button class="button button--primary" type="submit">Send message</button>
+                    <p class="contact__notice">Your information stays private.</p>
+                </form>
+                <div class="contact__cards">
+                    <div class="contact__card">
+                        <h3>Email</h3>
+                        <a href="mailto:mouhamedelmessadi@gmail.com">mouhamedelmessadi@gmail.com</a>
+                    </div>
+                    <div class="contact__card">
+                        <h3>GitHub</h3>
+                        <a href="https://github.com/maywanel" target="_blank">github.com/maywanel</a>
+                    </div>
+                    <div class="contact__card">
+                        <h3>LinkedIn</h3>
+                        <a href="https://www.linkedin.com/in/mohamed-el-messaadi-0040b8345/" target="_blank">linkedin.com/in/mohamed-el-messaadi</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>© <span id="currentYear"></span> Mohamed El Messaadi. Built with passion and Arch Linux.</p>
+        <div class="footer__links">
+            <a href="https://github.com/maywanel" target="_blank">GitHub</a>
+            <a href="mailto:mouhamedelmessadi@gmail.com">Email</a>
+            <a href="contacts.html" class="footer__link--admin">Inbox</a>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js" defer></script>
+    <script src="scripts/main.js" defer></script>
+</body>
+</html>

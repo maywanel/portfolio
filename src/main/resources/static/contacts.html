@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" data-api-base="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contact messages for Mohamed El Messaadi's portfolio backend.">
+    <title>Contact Inbox · Mohamed El Messaadi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="icon" type="image/png" href="images/favicon/favicon.ico" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="images/favicon/favicon.svg" />
+    <link rel="shortcut icon" href="images/favicon/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="images/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="site.webmanifest" />
+</head>
+<body class="inbox">
+    <nav class="nav nav--compact" aria-label="Secondary">
+        <a class="nav__brand" href="index.html">← Back to portfolio</a>
+        <div class="nav__brand nav__brand--muted">Contact inbox</div>
+    </nav>
+
+    <main class="inbox__main">
+        <header class="inbox__header">
+            <div>
+                <p class="inbox__eyebrow">Inbox</p>
+                <h1>Recent contact submissions</h1>
+                <p class="inbox__subtitle">Messages are stored in memory only. Refresh to fetch the latest submissions captured since the backend was started.</p>
+            </div>
+            <div class="inbox__actions">
+                <button id="refreshInbox" class="button button--ghost" type="button">Refresh</button>
+            </div>
+        </header>
+
+        <section class="inbox__body" aria-live="polite">
+            <div id="inboxStatus" class="inbox__status inbox__status--info">Loading messages…</div>
+            <div class="inbox__table-wrapper">
+                <table class="inbox__table" id="inboxTable">
+                    <thead>
+                        <tr>
+                            <th scope="col">Received</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Message</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Rows injected here -->
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <script src="scripts/main.js" defer></script>
+    <script src="scripts/inbox.js" defer></script>
+</body>
+</html>

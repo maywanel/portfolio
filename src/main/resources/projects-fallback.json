@@ -1,0 +1,26 @@
+[
+  {
+    "name": "portfolio-starter",
+    "description": "Responsive personal site template with dark mode and GitHub integration.",
+    "htmlUrl": "https://github.com/maywanel/portfolio-starter",
+    "language": "TypeScript",
+    "stars": 12,
+    "updatedAt": "2024-10-12T10:15:30Z"
+  },
+  {
+    "name": "cloud-deploy-toolkit",
+    "description": "Infrastructure-as-code templates and pipelines for cloud-native deployments.",
+    "htmlUrl": "https://github.com/maywanel/cloud-deploy-toolkit",
+    "language": "Terraform",
+    "stars": 20,
+    "updatedAt": "2024-08-03T08:05:12Z"
+  },
+  {
+    "name": "insight-dashboard",
+    "description": "Modular analytics dashboard with real-time data visualizations.",
+    "htmlUrl": "https://github.com/maywanel/insight-dashboard",
+    "language": "Python",
+    "stars": 8,
+    "updatedAt": "2024-12-01T17:42:00Z"
+  }
+]
