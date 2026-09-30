@@ -10,7 +10,7 @@ for (const width of [320, 390, 768, 1024, 1440]) {
     await page.setViewportSize({ width, height: 900 });
     await page.goto('/');
     await page.evaluate(() => document.fonts.ready);
-    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Built belowthe surface.');
+    await expect(page.getByRole('heading', { level: 1 })).toHaveText('Mohamed El Messaadi');
     for (const id of ['work', 'approach', 'about', 'contact']) {
       await page.locator(`#${id}`).scrollIntoViewIfNeeded();
       await expect(page.locator(`#${id}`)).toBeVisible();
@@ -38,12 +38,12 @@ for (const width of [320, 390, 768, 1024, 1440]) {
 test('system sketch switches by pointer and keyboard', async ({ page }) => {
   await page.goto('/');
   await page.getByRole('tab', { name: /Access/ }).click();
-  await expect(page.getByRole('tabpanel')).toContainText('Make the boundary explicit.');
+  await expect(page.getByRole('tabpanel')).toContainText('Authorization');
   await page.getByRole('tab', { name: /Access/ }).press('ArrowRight');
   await expect(page.getByRole('tab', { name: /Deploy/ })).toBeFocused();
-  await expect(page.getByRole('tabpanel')).toContainText('Give every service a place.');
+  await expect(page.getByRole('tabpanel')).toContainText('Reverse proxy');
   await page.getByRole('tab', { name: /Deploy/ }).press('Home');
-  await expect(page.getByRole('tabpanel')).toContainText('Follow the request.');
+  await expect(page.getByRole('tabpanel')).toContainText('HTTP request');
 });
 
 test('engineering notes expand and collapse independently', async ({ page }) => {
@@ -54,7 +54,7 @@ test('engineering notes expand and collapse independently', async ({ page }) => 
     const close = page.getByRole('button', { name: `Close engineering notes for ${name}`, exact: true });
     await expect(close).toHaveAttribute('aria-expanded', 'true');
     const panel = page.locator(`#${await close.getAttribute('aria-controls')}`);
-    await expect(panel.getByRole('heading', { name: 'The challenge' })).toBeVisible();
+    await expect(panel.locator('p')).toBeVisible();
     await close.click();
     await expect(trigger).toHaveAttribute('aria-expanded', 'false');
     await expect(panel).toHaveAttribute('inert', '');
@@ -85,7 +85,7 @@ test('email copy succeeds and handles denied clipboard access', async ({ page, c
   await page.evaluate(() => { Object.defineProperty(navigator.clipboard, 'writeText', { value: () => Promise.reject(new Error('Denied')) }); });
   await page.getByRole('button', { name: 'Email copied', exact: true }).click();
   await expect(page.getByRole('status')).toContainText('Use the email link instead.');
-  await expect(page.getByRole('link', { name: 'Start a conversation' })).toHaveAttribute('href', 'mailto:mouhamedelmessadi@gmail.com');
+  await expect(page.getByRole('link', { name: 'Email me' })).toHaveAttribute('href', 'mailto:mouhamedelmessadi@gmail.com');
 });
 
 test('page and expanded controls pass accessibility checks', async ({ page }) => {
@@ -114,9 +114,9 @@ test('essential content works without JavaScript', async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
   const page = await context.newPage();
   await page.goto('http://127.0.0.1:3000');
-  await expect(page.getByRole('heading', { name: 'Proof in the projects.' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Projects' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Webserv', exact: true })).toBeVisible();
-  await expect(page.getByRole('link', { name: 'Start a conversation' })).toHaveAttribute('href', 'mailto:mouhamedelmessadi@gmail.com');
+  await expect(page.getByRole('link', { name: 'Email me' })).toHaveAttribute('href', 'mailto:mouhamedelmessadi@gmail.com');
   await context.close();
 });
 
@@ -125,6 +125,6 @@ test('custom 404 and metadata are available', async ({ page, request }) => {
   expect(response?.status()).toBe(404);
   await expect(page.getByRole('heading', { name: 'This route ends here.' })).toBeVisible();
   await page.getByRole('link', { name: 'Back to the portfolio' }).click();
-  await expect(page.getByRole('heading', { level: 1 })).toContainText('Built below');
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Mohamed');
   for (const path of ['/robots.txt', '/sitemap.xml', '/social-card.png', '/icon.svg']) expect((await request.get(path)).status()).toBe(200);
 });

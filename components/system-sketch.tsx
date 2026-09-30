@@ -4,9 +4,9 @@ import { useRef, useState, type KeyboardEvent } from 'react';
 import { Arrow, StackIcon } from './icons';
 
 const flows = [
-  { name: 'Request', label: 'Follow the request.', text: 'Parse the input, route it to the right handler, and return a predictable response.', top: 'CLIENT', input: 'GET /books', middle: 'HTTP service', left: 'Parse', right: 'Route', bottom: 'Response', output: '200 OK' },
-  { name: 'Access', label: 'Make the boundary explicit.', text: 'Verify identity, check the required permissions, and only then allow access to data.', top: 'CLIENT', input: 'Bearer token', middle: 'Access control', left: 'Identity', right: 'Role', bottom: 'Resource', output: 'Access granted' },
-  { name: 'Deploy', label: 'Give every service a place.', text: 'Keep traffic, application logic, and persistent data in separate, connected services.', top: 'INTERNET', input: 'HTTPS :443', middle: 'Nginx proxy', left: 'TLS', right: 'Network', bottom: 'Application', output: 'Docker container' },
+  { name: 'Request', label: 'HTTP request', text: 'The server parses the request, runs its handler, and sends a response.', top: 'CLIENT', input: 'GET /books', middle: 'HTTP service', left: 'Parse', right: 'Route', bottom: 'Response', output: '200 OK' },
+  { name: 'Access', label: 'Authorization', text: 'The service checks identity and permissions before returning a resource.', top: 'CLIENT', input: 'Bearer token', middle: 'Access control', left: 'Identity', right: 'Role', bottom: 'Resource', output: 'Access granted' },
+  { name: 'Deploy', label: 'Reverse proxy', text: 'Nginx terminates TLS and forwards the request to an application container.', top: 'INTERNET', input: 'HTTPS :443', middle: 'Nginx proxy', left: 'TLS', right: 'Network', bottom: 'Application', output: 'Docker container' },
 ];
 
 export function SystemSketch() {
@@ -24,9 +24,8 @@ export function SystemSketch() {
   }
   return (
     <div className="system-sketch">
-      <div className="sketch-heading"><span className="eyebrow">Behind the interface</span><StackIcon width={19} height={19} /></div>
+      <div className="sketch-heading"><span className="eyebrow">Backend examples</span><StackIcon width={19} height={19} /></div>
       <div className="sketch-canvas" aria-hidden="true">
-        <div className="sketch-coordinate">SYS — 001</div>
         <svg viewBox="0 0 480 330" className="system-svg" fill="none">
           <path className="diagram-line" d="M240 77v58M240 199v57M142 167H66v-40M338 167h76v-40" />
           <path className="diagram-packet" d="M240 77v58M240 199v57" />
@@ -40,7 +39,7 @@ export function SystemSketch() {
           <rect x="158" y="256" width="164" height="54" rx="5" className="diagram-node" /><text x="240" y="278" className="svg-label" textAnchor="middle">{flow.bottom}</text><text x="240" y="297" className="svg-small" textAnchor="middle">{flow.output}</text>
           <text x="251" y="109" className="svg-tiny">IN</text><text x="251" y="231" className="svg-tiny">OUT</text>
         </svg>
-        <span className="sketch-caption">Illustrative architecture</span><span className="sketch-cross" aria-hidden="true">+</span>
+        <span className="sketch-caption">Example flow</span><span className="sketch-cross" aria-hidden="true">+</span>
       </div>
       <div className="sketch-tabs" role="tablist" aria-label="Explore backend architecture">
         {flows.map((item, index) => <button key={item.name} ref={(element) => { tabs.current[index] = element; }} id={`flow-tab-${index}`} role="tab" aria-selected={selected === index} aria-controls={`flow-panel-${index}`} tabIndex={selected === index ? 0 : -1} onClick={() => setSelected(index)} onKeyDown={(event) => onKeyDown(event, index)}><span className="tab-index">0{index + 1}</span>{item.name}<Arrow width={14} height={14} /></button>)}

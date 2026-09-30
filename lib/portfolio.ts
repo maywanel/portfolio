@@ -15,59 +15,43 @@ export type Project = {
   technologies: string[];
   href?: string;
   status?: string;
-  detail: { title: string; text: string }[];
+  detail: string;
   visual: 'http' | 'containers' | 'books' | 'access';
 };
 
 export const projects: Project[] = [
   {
     number: '01', name: 'Webserv', category: 'HTTP server / systems programming', date: 'April 2026',
-    summary: 'An HTTP/1.1 server, built from the socket up. A closer look at what really happens between a request and a response.',
+    summary: 'I built an HTTP/1.1 server in C++98 with nonblocking sockets and epoll.',
     technologies: ['C++98', 'POSIX sockets', 'epoll', 'HTTP/1.1'],
     href: 'https://github.com/maywanel/webserv', visual: 'http',
-    detail: [
-      { title: 'The challenge', text: 'Handle multiple clients without blocking the server, while turning raw socket data into valid HTTP requests and responses.' },
-      { title: 'The implementation', text: 'Nonblocking sockets and epoll manage connections. Request parsing, routing, CGI execution, and file uploads form the application layer.' },
-      { title: 'What I learned', text: 'Protocol details matter. Following a request through each layer makes connection handling and server behavior much easier to reason about.' },
-    ],
+    detail: 'The hardest part for me was connecting CGI execution to the multiplexing and request parsing. Getting those pieces to work together gave me a lot of trouble.',
   },
   {
     number: '02', name: 'Inception', category: 'Containerized infrastructure', date: 'July 2026',
-    summary: 'A multi-service environment with clear boundaries. Separate containers, persistent data, and one controlled entry point.',
+    summary: 'I used Docker Compose to connect separate services, with Nginx handling TLS termination and volumes keeping data across restarts.',
     technologies: ['Docker', 'Compose', 'Nginx', 'MariaDB', 'Redis'],
     href: 'https://github.com/maywanel/inception', visual: 'containers',
-    detail: [
-      { title: 'The challenge', text: 'Give each service its own responsibility while keeping networking, storage, and startup behavior understandable.' },
-      { title: 'The implementation', text: 'Docker Compose connects the services through an organized network. Nginx handles TLS termination; volumes preserve data across container restarts.' },
-      { title: 'What I learned', text: 'Infrastructure is part of the application. Service boundaries, persistence, and restart behavior need the same attention as application logic.' },
-    ],
+    detail: 'The amount of material to learn was the hardest part of Inception for me. It felt like a rabbit hole: every topic led to more things to read.',
   },
   {
     number: '03', name: 'PageTurner', category: 'Application backend', date: 'January 2026',
-    summary: 'A book management API with authenticated user flows, role-based administration, and cached external book data.',
+    summary: 'I built a book management API with Spring Security, JWT authentication, role-based administration, and cached external book data.',
     technologies: ['Java', 'Spring Boot', 'Spring Security', 'JWT'],
     href: 'https://github.com/maywanel/PageTurner', visual: 'books',
-    detail: [
-      { title: 'The challenge', text: 'Connect book discovery and management with clear user permissions and efficient access to external book data.' },
-      { title: 'The implementation', text: 'Spring Security and JWT support authentication and role-based administration. Caching reduces repeated requests for external book data.' },
-      { title: 'What I learned', text: 'Authentication, authorization, and data access are distinct concerns. Keeping those responsibilities clear makes a backend easier to extend.' },
-    ],
+    detail: 'JWT gave me a lot of trouble, and I found Spring Boot’s structure confusing. Those were the hardest parts of PageTurner for me.',
   },
   {
     number: '04', name: 'ft_transcendence', category: 'Collaborative platform / team project', date: 'Expected November 2026',
-    summary: 'Backend work for a shared workspace platform. Building around identity, organization roles, and explicit access rules.',
+    summary: 'I’m working on authentication, organization roles, and shared workspaces with a team.',
     technologies: ['Node.js', 'Fastify', 'PostgreSQL', 'Access control'],
     status: 'In progress · private repository', visual: 'access',
-    detail: [
-      { title: 'The challenge', text: 'Model identity and organization-level permissions for a platform used by multiple people and teams.' },
-      { title: 'My focus', text: 'Working with a team on authentication, shared workspaces, organization roles, and API behavior around access control.' },
-      { title: 'Current status', text: 'In development, with completion expected in November 2026. The repository is currently private.' },
-    ],
+    detail: 'This is my first big project with a full team where everyone has a role, and I like that part of it. It’s still in development, with completion expected in November 2026. The repository is currently private.',
   },
 ];
 
 export const toolkit = [
-  { name: 'Languages', description: 'From memory to application logic.', items: ['C / C++', 'Java', 'JavaScript', 'SQL', 'Bash'] },
-  { name: 'Backend', description: 'Interfaces with clear responsibilities.', items: ['Node.js', 'Fastify', 'Spring Boot', 'Spring Security', 'REST APIs'] },
-  { name: 'Infrastructure', description: 'Everything the application runs on.', items: ['Linux', 'Docker / Compose', 'Nginx', 'PostgreSQL', 'Git'] },
+  { name: 'Languages', description: 'I use these for systems code, APIs, and scripts.', items: ['C / C++', 'Java', 'JavaScript', 'SQL', 'Bash'] },
+  { name: 'Backend', description: 'I use these to build APIs and handle authentication.', items: ['Node.js', 'Fastify', 'Spring Boot', 'Spring Security', 'REST APIs'] },
+  { name: 'Infrastructure', description: 'I use these for containers, databases, and version control.', items: ['Linux', 'Docker / Compose', 'Nginx', 'PostgreSQL', 'Git'] },
 ];
