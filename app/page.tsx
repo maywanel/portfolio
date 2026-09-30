@@ -39,10 +39,6 @@ export default function Home() {
         <Reveal><div className="work-footnote"><span>More experiments and source code on GitHub.</span><a className="quiet-link" href={profile.github} target="_blank" rel="noopener noreferrer">github.com/maywanel <Arrow diagonal width={15} height={15} /></a></div></Reveal>
       </section>
 
-      <section id="approach" className="approach-section section-pad section-anchor" aria-labelledby="approach-title"><div className="shell">
-        <Reveal><div className="section-heading"><div><h2 id="approach-title">How I work</h2></div><p>At 1337, I learn through projects, debugging, and peer review. ft_transcendence is my first big project with a full team and a role for each person.</p></div></Reveal>
-      </div></section>
-
       <section id="about" className="section-pad shell section-anchor" aria-labelledby="about-title"><div className="about-layout">
         <Reveal><div className="about-heading"><h2 id="about-title">About</h2><div className="about-monogram" aria-hidden="true"><Image className="about-logo" src="/mylogo.png" alt="" width={160} height={160} /><div className="monogram-axis axis-x" /><div className="monogram-axis axis-y" /><span className="monogram-coordinate">BEN GUERIR / MOROCCO</span></div><div className="about-caption"><span>{profile.name}</span><span>{profile.location}</span></div></div></Reveal>
         <Reveal><div className="about-copy"><p className="about-lead">I’m a 1337 student in Ben Guerir, Morocco.</p><p>I’ve been studying software engineering at <strong>1337 Coding School</strong>, part of the 42 Network, since October 2024.</p><p>I’ve also taken part in DevOps workshops on deployment and automation, and CTF challenges.</p><div className="education-note"><span className="education-number">42</span><div><h3>1337 Coding School</h3><p>Software engineering · October 2024 — present</p></div></div></div></Reveal>

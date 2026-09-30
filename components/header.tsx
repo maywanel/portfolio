@@ -6,7 +6,6 @@ import { Arrow } from './icons';
 
 const links = [
   { href: '#work', label: 'Work' },
-  { href: '#approach', label: 'Approach' },
   { href: '#about', label: 'About' },
 ];
 

@@ -11,7 +11,7 @@ for (const width of [320, 390, 768, 1024, 1440]) {
     await page.goto('/');
     await page.evaluate(() => document.fonts.ready);
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Mohamed El Messaadi');
-    for (const id of ['work', 'approach', 'about', 'contact']) {
+    for (const id of ['work', 'about', 'contact']) {
       await page.locator(`#${id}`).scrollIntoViewIfNeeded();
       await expect(page.locator(`#${id}`)).toBeVisible();
     }
@@ -70,7 +70,7 @@ test('mobile menu navigates, closes and supports Escape', async ({ page }) => {
   await expect(page).toHaveURL(/#about$/);
   await expect(menu).toHaveAttribute('aria-expanded', 'false');
   await menu.click();
-  await page.getByRole('link', { name: 'Approach', exact: true }).focus();
+  await page.getByRole('link', { name: 'Work', exact: true }).focus();
   await page.keyboard.press('Escape');
   await expect(menu).toBeFocused();
   await expect(menu).toHaveAttribute('aria-expanded', 'false');
