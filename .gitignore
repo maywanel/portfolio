@@ -1,0 +1,18 @@
+node_modules/
+.next/
+out/
+_next/
+/fonts/
+*.tsbuildinfo
+.env*
+!.env.example
+playwright-report/
+test-results/
+.DS_Store
+
+# Generated root static-preview assets
+/icon.svg
+/social-card.png
+/robots.txt
+/sitemap.xml
+/404.html
