@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import { Arrow } from './icons';
 
 const links = [
@@ -39,7 +40,7 @@ export function Header() {
     <header className="site-header" ref={header}>
       <div className="shell header-inner">
         <a className="brand group" href="#top" aria-label="Mohamed El Messaadi, back to top" onClick={() => setOpen(false)}>
-          <span className="brand-mark" aria-hidden="true">m<span>.</span></span>
+          <Image className="brand-mark" src="/mylogo.png" alt="" aria-hidden="true" width={42} height={42} />
           <span className="brand-name">Mohamed El Messaadi<span>Backend developer</span></span>
         </a>
         <button className="menu-button" ref={menuButton} aria-expanded={open} aria-controls="main-navigation" onClick={() => setOpen(!open)}>

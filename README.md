@@ -21,7 +21,7 @@ npm run build
 npm start
 ```
 
-The complete deployable site is generated in `out/`. `npm start` previews that exact export at http://127.0.0.1:3000. The build also updates the original root `index.html` and its `_next/` assets for existing static previews. Do not edit generated HTML directly.
+The complete deployable site is generated in `out/`. `npm start` previews that exact export at http://127.0.0.1:3000. The build also updates the original root `index.html` and its `_next/` assets for existing static previews. Do not edit generated HTML directly. The shared logo lives in `public/mylogo.png`; the build also copies it to the root for static previews.
 
 ```sh
 npx playwright install chromium
