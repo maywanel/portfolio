@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr';
 import { profile } from '@/lib/portfolio';
 import { HeroBackdrop, MagneticLink } from './motion';
@@ -8,11 +9,7 @@ export function Hero() {
       <HeroBackdrop />
       <div className="shell hero-stage">
         <div className="portrait-frame">
-          {/* Responsive derivatives of the supplied transparent portrait; preserve its aspect ratio. */}
-          <picture>
-            <source type="image/webp" srcSet="/portrait-640.webp 640w, /portrait-1200.webp 1200w" sizes="(max-width: 700px) 95vw, 49vw" />
-            <img className="hero-portrait" src="/me.png" width={1200} height={1600} alt="Mohamed El Messaadi" fetchPriority="high" />
-          </picture>
+          <Image className="hero-portrait" src="/me.png" width={1089} height={1445} alt="Mohamed El Messaadi" preload />
         </div>
         <div className="hero-copy">
           <h1 id="hero-title">Mohamed <span>El Messaadi</span></h1>

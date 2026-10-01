@@ -21,7 +21,7 @@ npm run build
 npm start
 ```
 
-The complete deployable site is generated in `out/`. `npm start` previews that exact export at http://127.0.0.1:3000. The build also updates the original root `index.html` and its `_next/` assets for existing static previews. Do not edit generated HTML directly. The hero uses the supplied `public/me.png`, with responsive transparent WebP derivatives in `public/portrait-640.webp` and `public/portrait-1200.webp`. The navigation uses a text monogram.
+The complete deployable site is generated in `out/`. `npm start` previews that exact export at http://127.0.0.1:3000. The build also updates the original root `index.html` and its `_next/` assets for existing static previews. Do not edit generated HTML directly. The hero uses `public/me.png` directly. Replace that file to update the portrait; the build also refreshes `me.png` in the root static preview. The navigation uses a text monogram.
 
 ```sh
 npx playwright install chromium

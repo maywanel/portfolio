@@ -9,7 +9,7 @@ An editorial, portrait-led portfolio for Mohamed El Messaadi, Backend & Systems 
 - Oversized decorative systems lettering sits behind the supplied monochrome portrait. The semantic heading remains the person's name. Decorative lettering and diagrams are excluded from assistive technology.
 - Pill CTAs, 14–16px card radii, subtle metallic gradients. The project grid features one wide architecture project, then two smaller projects. Cards show real implementation details.
 - 1320px maximum content width, 56px desktop gutters, 20px mobile gutters. Section spacing scales from 80px to 140px. Layout changes at 1100px, 800px, 700px, and 380px.
-- The provided `me.png` is preserved in `public`. Responsive WebP derivatives keep transparency and aspect ratio. Grayscale and edge fades are presentation CSS, not modifications of the original portrait.
+- The hero uses `public/me.png` directly, preserving transparency and aspect ratio. No separate portrait derivatives are required. Grayscale and edge fades are presentation CSS, not modifications of the original portrait.
 
 ## Motion
 
