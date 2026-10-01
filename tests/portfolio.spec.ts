@@ -81,7 +81,7 @@ test('email copy succeeds and handles denied clipboard access', async ({ page, c
   await expect(page.getByRole('link', { name: 'Email me' })).toHaveAttribute('href', 'mailto:mouhamedelmessadi@gmail.com');
 });
 
-test('page and expanded controls pass accessibility checks', async ({ page }) => {
+test('page and mobile navigation pass accessibility checks', async ({ page }) => {
   // Audit final rendered states rather than intermediate animation frames.
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
@@ -106,7 +106,7 @@ test('essential content works without JavaScript', async ({ browser }) => {
   const context = await browser.newContext({ javaScriptEnabled: false, viewport: { width: 390, height: 844 } });
   const page = await context.newPage();
   await page.goto('http://127.0.0.1:3000');
-  await expect(page.getByRole('heading', { name: 'Projects' })).toBeVisible();
+  await expect(page.getByRole('heading', { name: 'Selected work.' })).toBeVisible();
   await expect(page.getByRole('heading', { name: 'Webserv', exact: true })).toBeVisible();
   await expect(page.getByRole('link', { name: 'Email me' })).toHaveAttribute('href', 'mailto:mouhamedelmessadi@gmail.com');
   await context.close();
@@ -122,7 +122,7 @@ test('custom 404 and metadata are available', async ({ page, request }) => {
 });
 
 for (const colorScheme of ['light', 'dark'] as const) {
-  test(`accessible ${colorScheme} theme and resume`, async ({ page }) => {
+  test(`accessible dark design under ${colorScheme} system preference and resume`, async ({ page }) => {
     await page.emulateMedia({ colorScheme, reducedMotion: 'reduce' });
     for (const route of ['/', '/resume/']) {
       await page.goto(route);
@@ -131,3 +131,44 @@ for (const colorScheme of ['light', 'dark'] as const) {
     }
   });
 }
+
+
+test('portrait loads and decorative type responds to scroll', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/');
+  const portrait = page.getByRole('img', { name: 'Mohamed El Messaadi', exact: true });
+  await expect(portrait).toBeVisible();
+  await expect.poll(() => portrait.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true);
+  const backdrop = page.locator('.hero-display');
+  const initial = await backdrop.evaluate(el => getComputedStyle(el).transform);
+  await page.evaluate(() => window.scrollTo({ top: 450, behavior: 'instant' }));
+  await expect.poll(() => backdrop.evaluate(el => getComputedStyle(el).transform)).not.toBe(initial);
+});
+
+test('magnetic links and project tilt reset after pointer leaves', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/');
+  const button = page.locator('.nav-contact');
+  await button.hover({ position: { x: 10, y: 10 } });
+  await expect.poll(() => button.evaluate(el => getComputedStyle(el).transform)).not.toBe('matrix(1, 0, 0, 1, 0, 0)');
+  await page.mouse.move(5, 5);
+  await expect.poll(() => button.evaluate(el => {
+    const m = new DOMMatrix(getComputedStyle(el).transform); return Math.abs(m.m41) + Math.abs(m.m42);
+  })).toBeLessThan(0.1);
+  const card = page.locator('.tilt-card').first();
+  await card.hover({ position: { x: 40, y: 40 } });
+  await expect.poll(() => card.evaluate(el => Math.abs(new DOMMatrix(getComputedStyle(el).transform).m13))).toBeGreaterThan(0.001);
+});
+
+test('reduced motion keeps pointer and parallax effects stationary', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
+  await page.goto('/');
+  const button = page.locator('.nav-contact');
+  await button.hover({ position: { x: 10, y: 10 } });
+  await expect(button).toHaveCSS('transform', 'none');
+  await page.evaluate(() => window.scrollTo({ top: 450, behavior: 'instant' }));
+  await expect(page.locator('.hero-display')).toHaveCSS('transform', 'none');
+  const card = page.locator('.tilt-card').first();
+  await card.hover();
+  await expect(card).toHaveCSS('transform', 'none');
+});

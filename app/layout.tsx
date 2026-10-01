@@ -5,13 +5,15 @@ import './globals.css';
 
 const sans = localFont({
   src: [
-    { path: '../public/fonts/ibm-plex-sans-400.ttf', weight: '400', style: 'normal' },
-    { path: '../public/fonts/ibm-plex-sans-500.ttf', weight: '500', style: 'normal' },
-    { path: '../public/fonts/ibm-plex-sans-600.ttf', weight: '600', style: 'normal' },
+    { path: '../public/fonts/ibm-plex-sans-400.woff2', weight: '400', style: 'normal' },
+    { path: '../public/fonts/ibm-plex-sans-500.woff2', weight: '500', style: 'normal' },
   ],
   variable: '--font-plex', display: 'swap', fallback: ['Arial', 'sans-serif'],
 });
-const mono = localFont({ src: '../public/fonts/ibm-plex-mono-400-normal.ttf', variable: '--font-plex-mono', display: 'swap', preload: false, fallback: ['Courier New', 'monospace'] });
+const display = localFont({
+  src: '../public/fonts/space-grotesk-600.woff2', weight: '600',
+  variable: '--font-display', display: 'swap', fallback: ['Arial', 'sans-serif'],
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL(profile.url),
@@ -22,8 +24,8 @@ export const metadata: Metadata = {
   twitter: { card: 'summary_large_image', title: 'Mohamed El Messaadi | Backend & Systems Software Engineer', description: 'HTTP servers, secure APIs, and containerized infrastructure.', images: ['/social-card.png'] },
   robots: { index: true, follow: true },
 };
-export const viewport: Viewport = { themeColor: '#080f18', colorScheme: 'dark light' };
+export const viewport: Viewport = { themeColor: '#111110', colorScheme: 'dark' };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en" className={`${sans.variable} ${mono.variable}`}><body>{children}</body></html>;
+  return <html lang="en" className={`${sans.variable} ${display.variable}`}><body>{children}</body></html>;
 }

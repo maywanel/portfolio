@@ -4,7 +4,7 @@ import { cp, copyFile, writeFile } from 'node:fs/promises';
 // Deploy out/ as a whole; it is the canonical, self-contained export.
 await copyFile('out/index.html', 'index.html');
 await cp('out/_next', '_next', { recursive: true });
-for (const file of ['brand-mark.webp', 'mylogo.png', 'icon.svg', 'social-card.png', 'robots.txt', 'sitemap.xml', '404.html']) {
+for (const file of ['portrait-640.webp', 'portrait-1200.webp', 'brand-mark.webp', 'mylogo.png', 'icon.svg', 'social-card.png', 'robots.txt', 'sitemap.xml', '404.html']) {
   await copyFile(`out/${file}`, file);
 }
 await writeFile('out/.nojekyll', '');

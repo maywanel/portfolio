@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import Image from 'next/image';
+import { MagneticLink } from './motion';
 import { Arrow } from './icons';
 
 const links = [
@@ -40,15 +40,14 @@ export function Header() {
     <header className="site-header" ref={header}>
       <div className="shell header-inner">
         <a className="brand group" href="#top" aria-label="Mohamed El Messaadi, back to top" onClick={() => setOpen(false)}>
-          <Image className="brand-mark" src="/brand-mark.webp" alt="" aria-hidden="true" width={42} height={42} />
-          <span className="brand-name">Mohamed El Messaadi<span>Backend &amp; Systems</span></span>
+          <span className="monogram" aria-hidden="true">ME<span>.</span></span>
         </a>
         <button className="menu-button" ref={menuButton} aria-expanded={open} aria-controls="main-navigation" onClick={() => setOpen(!open)}>
           <span>{open ? 'Close' : 'Menu'}</span><span className={`menu-lines ${open ? 'is-open' : ''}`} aria-hidden="true"><i /><i /></span>
         </button>
         <nav id="main-navigation" aria-label="Main navigation" className={`main-nav ${open ? 'is-open' : ''}`}>
           {links.map(({ href, label }) => <a key={href} href={href} aria-current={active === href ? 'location' : undefined} onClick={() => setOpen(false)}>{label}</a>)}
-          <a href="#contact" className="nav-contact" aria-current={active === '#contact' ? 'location' : undefined} onClick={() => setOpen(false)}>Let’s talk <Arrow diagonal width={15} height={15} /></a>
+          <MagneticLink href="#contact" className="nav-contact button button-outline" onClick={() => setOpen(false)}>Let’s talk <Arrow diagonal width={15} height={15} /></MagneticLink>
         </nav>
       </div>
     </header>
