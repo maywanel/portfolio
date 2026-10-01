@@ -23,7 +23,7 @@ for (const width of [320, 390, 768, 1024, 1440]) {
     }));
     expect(layout.overflow).toBe(false);
     expect(layout.fonts).toBeGreaterThan(0);
-    expect(layout.emoji).toBe(false);
+    expect(layout.emoji).toBe(true);
     expect(layout.missingAnchors).toEqual([]);
     expect(errors).toEqual([]);
     expect(failedAssets).toEqual([]);
@@ -35,29 +35,22 @@ for (const width of [320, 390, 768, 1024, 1440]) {
   });
 }
 
-test('system sketch switches by pointer and keyboard', async ({ page }) => {
+test('hero exposes role, location and working resume', async ({ page }) => {
   await page.goto('/');
-  await page.getByRole('tab', { name: /Access/ }).click();
-  await expect(page.getByRole('tabpanel')).toContainText('Authorization');
-  await page.getByRole('tab', { name: /Access/ }).press('ArrowRight');
-  await expect(page.getByRole('tab', { name: /Deploy/ })).toBeFocused();
-  await expect(page.getByRole('tabpanel')).toContainText('Reverse proxy');
-  await page.getByRole('tab', { name: /Deploy/ }).press('Home');
-  await expect(page.getByRole('tabpanel')).toContainText('HTTP request');
+  await expect(page.locator('.hero')).toContainText('Backend & Systems Software Engineer');
+  await expect(page.locator('.hero')).toContainText('Ben Guerir, Morocco');
+  await page.locator('.hero').getByRole('link', { name: 'Resume', exact: true }).click();
+  await expect(page).toHaveURL(/\/resume\/$/);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Mohamed El Messaadi');
+  await expect(page.getByRole('button', { name: 'Print / Save as PDF' })).toBeVisible();
 });
 
-test('engineering notes expand and collapse independently', async ({ page }) => {
+test('project evidence is visible without expanding controls', async ({ page }) => {
   await page.goto('/');
-  for (const name of ['Webserv', 'Inception', 'PageTurner', 'ft_transcendence']) {
-    const trigger = page.getByRole('button', { name: `Engineering notes for ${name}`, exact: true });
-    await trigger.click();
-    const close = page.getByRole('button', { name: `Close engineering notes for ${name}`, exact: true });
-    await expect(close).toHaveAttribute('aria-expanded', 'true');
-    const panel = page.locator(`#${await close.getAttribute('aria-controls')}`);
-    await expect(panel.locator('p')).toBeVisible();
-    await close.click();
-    await expect(trigger).toHaveAttribute('aria-expanded', 'false');
-    await expect(panel).toHaveAttribute('inert', '');
+  for (const name of ['Webserv', 'BookLibrary', 'ft_transcendence']) {
+    const project = page.getByRole('article').filter({ has: page.getByRole('heading', { name, exact: true }) });
+    await expect(project.getByRole('heading', { name: 'Implementation' })).toBeVisible();
+    await expect(project.locator('.implementation-list li')).toHaveCount(3);
   }
 });
 
@@ -92,7 +85,6 @@ test('page and expanded controls pass accessibility checks', async ({ page }) =>
   // Audit final rendered states rather than intermediate animation frames.
   await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.goto('/');
-  await page.getByRole('button', { name: 'Engineering notes for Webserv', exact: true }).click();
   const desktop = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
   expect(desktop.violations.map((v) => ({ id: v.id, nodes: v.nodes.map((n) => ({ target: n.target, issue: n.failureSummary })) }))).toEqual([]);
   await page.setViewportSize({ width: 390, height: 844 });
@@ -106,7 +98,7 @@ test('reduced motion stops animation and smooth scrolling', async ({ page }) => 
   await page.goto('/');
   expect(await page.evaluate(() => ({
     scroll: getComputedStyle(document.documentElement).scrollBehavior,
-    animation: getComputedStyle(document.querySelector('.diagram-packet')!).animationName,
+    animation: getComputedStyle(document.querySelector('.hero')!).animationName,
   }))).toEqual({ scroll: 'auto', animation: 'none' });
 });
 
@@ -128,3 +120,14 @@ test('custom 404 and metadata are available', async ({ page, request }) => {
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Mohamed');
   for (const path of ['/robots.txt', '/sitemap.xml', '/social-card.png', '/icon.svg']) expect((await request.get(path)).status()).toBe(200);
 });
+
+for (const colorScheme of ['light', 'dark'] as const) {
+  test(`accessible ${colorScheme} theme and resume`, async ({ page }) => {
+    await page.emulateMedia({ colorScheme, reducedMotion: 'reduce' });
+    for (const route of ['/', '/resume/']) {
+      await page.goto(route);
+      const audit = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
+      expect(audit.violations).toEqual([]);
+    }
+  });
+}

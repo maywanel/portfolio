@@ -1,57 +1,71 @@
+// Keep public profile details and project evidence in one place.
 export const profile = {
   name: 'Mohamed El Messaadi',
+  role: 'Backend & Systems Software Engineer',
   email: 'mouhamedelmessadi@gmail.com',
   github: 'https://github.com/maywanel',
+  linkedin: '', // Set only to a confirmed personal profile URL.
+  resume: '/resume/',
   location: 'Ben Guerir, Morocco',
   url: 'https://mohamedelmessaadi.tech',
 };
 
 export type Project = {
-  number: string;
   name: string;
   category: string;
-  date: string;
   summary: string;
   technologies: string[];
   href?: string;
   status?: string;
-  detail: string;
-  visual: 'http' | 'containers' | 'books' | 'access';
+  architecture: string[];
+  implementation: string[];
 };
 
 export const projects: Project[] = [
   {
-    number: '01', name: 'Webserv', category: 'HTTP server / systems programming', date: 'April 2026',
-    summary: 'I built an HTTP/1.1 server in C++98 with nonblocking sockets and epoll.',
-    technologies: ['C++98', 'POSIX sockets', 'epoll', 'HTTP/1.1'],
-    href: 'https://github.com/maywanel/webserv', visual: 'http',
-    detail: 'The hardest part for me was connecting CGI execution to the multiplexing and request parsing. Getting those pieces to work together gave me a lot of trouble.',
+    name: 'ft_transcendence',
+    category: 'Backend architecture',
+    status: 'In development · Private repository',
+    summary: 'Backend development for a collaborative platform with organization multi-tenancy and real-time features.',
+    technologies: ['TypeScript', 'Fastify', 'PostgreSQL', 'OAuth 2.0'],
+    architecture: ['Public API', 'Authentication & organization access', 'Platform services'],
+    implementation: [
+      'User management and public API endpoints for platform features.',
+      'Organization multi-tenancy with roles and shared workspaces.',
+      'Real-time features and OAuth 2.0 integration.',
+    ],
   },
   {
-    number: '02', name: 'Inception', category: 'Containerized infrastructure', date: 'July 2026',
-    summary: 'I used Docker Compose to connect separate services, with Nginx handling TLS termination and volumes keeping data across restarts.',
-    technologies: ['Docker', 'Compose', 'Nginx', 'MariaDB', 'Redis'],
-    href: 'https://github.com/maywanel/inception', visual: 'containers',
-    detail: 'The amount of material to learn was the hardest part of Inception for me. It felt like a rabbit hole: every topic led to more things to read.',
+    name: 'Webserv',
+    category: 'Low-level systems & networking',
+    summary: 'A non-blocking HTTP/1.1 web server built from scratch in C++98.',
+    technologies: ['C++98', 'POSIX sockets', 'epoll', 'HTTP/1.1', 'CGI'],
+    href: 'https://github.com/maywanel/webserv',
+    architecture: ['Socket I/O', 'Request parsing & routing', 'HTTP response / CGI'],
+    implementation: [
+      'I/O multiplexing with epoll to handle non-blocking socket connections.',
+      'HTTP request parsing, routing, and file upload handling.',
+      'CGI script execution connected to the server’s request and response lifecycle.',
+    ],
   },
   {
-    number: '03', name: 'PageTurner', category: 'Application backend', date: 'January 2026',
-    summary: 'I built a book management API with Spring Security, JWT authentication, role-based administration, and cached external book data.',
-    technologies: ['Java', 'Spring Boot', 'Spring Security', 'JWT'],
-    href: 'https://github.com/maywanel/PageTurner', visual: 'books',
-    detail: 'JWT gave me a lot of trouble, and I found Spring Boot’s structure confusing. Those were the hardest parts of PageTurner for me.',
-  },
-  {
-    number: '04', name: 'ft_transcendence', category: 'Collaborative platform / team project', date: 'Expected November 2026',
-    summary: 'I’m working on authentication, organization roles, and shared workspaces with a team.',
-    technologies: ['Node.js', 'Fastify', 'PostgreSQL', 'Access control'],
-    status: 'In progress · private repository', visual: 'access',
-    detail: 'This is my first big project with a full team where everyone has a role, and I like that part of it. It’s still in development, with completion expected in November 2026. The repository is currently private.',
+    name: 'BookLibrary',
+    category: 'Full-stack application',
+    summary: 'A book library application with a Java backend, authenticated access, and dynamic book data.',
+    technologies: ['Java', 'Spring Boot', 'Spring Security', 'JWT', 'Open Library API'],
+    // The public repository retains its original PageTurner name.
+    href: 'https://github.com/maywanel/PageTurner',
+    architecture: ['Library application', 'Secured Spring API', 'Cached Open Library data'],
+    implementation: [
+      'Spring Security and JWT authentication protect the application API.',
+      'Role-based administration supports book management.',
+      'Dynamic data caching integrates book information from the Open Library API.',
+    ],
   },
 ];
 
 export const toolkit = [
-  { name: 'Languages', description: 'I use these for systems code, APIs, and scripts.', items: ['C / C++', 'Java', 'JavaScript', 'SQL', 'Bash'] },
-  { name: 'Backend', description: 'I use these to build APIs and handle authentication.', items: ['Node.js', 'Fastify', 'Spring Boot', 'Spring Security', 'REST APIs'] },
-  { name: 'Infrastructure', description: 'I use these for containers, databases, and version control.', items: ['Linux', 'Docker / Compose', 'Nginx', 'PostgreSQL', 'Git'] },
+  { name: 'Languages', items: ['C', 'C++', 'Java', 'TypeScript', 'Bash', 'SQL'] },
+  { name: 'Infrastructure & Tools', items: ['Docker', 'Kubernetes', 'Nginx', 'Linux (Arch/Omarchy)', 'Git', 'Neovim'] },
+  { name: 'Frameworks', items: ['Spring Boot', 'Spring Security'] },
 ];

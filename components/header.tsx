@@ -7,6 +7,7 @@ import { Arrow } from './icons';
 const links = [
   { href: '#work', label: 'Work' },
   { href: '#about', label: 'About' },
+  { href: '#skills', label: 'Skills' },
 ];
 
 export function Header() {
@@ -39,8 +40,8 @@ export function Header() {
     <header className="site-header" ref={header}>
       <div className="shell header-inner">
         <a className="brand group" href="#top" aria-label="Mohamed El Messaadi, back to top" onClick={() => setOpen(false)}>
-          <Image className="brand-mark" src="/mylogo.png" alt="" aria-hidden="true" width={42} height={42} />
-          <span className="brand-name">Mohamed El Messaadi<span>Backend developer</span></span>
+          <Image className="brand-mark" src="/brand-mark.webp" alt="" aria-hidden="true" width={42} height={42} />
+          <span className="brand-name">Mohamed El Messaadi<span>Backend &amp; Systems</span></span>
         </a>
         <button className="menu-button" ref={menuButton} aria-expanded={open} aria-controls="main-navigation" onClick={() => setOpen(!open)}>
           <span>{open ? 'Close' : 'Menu'}</span><span className={`menu-lines ${open ? 'is-open' : ''}`} aria-hidden="true"><i /><i /></span>
