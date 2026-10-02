@@ -1,15 +1,19 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { MagneticLink } from './motion';
 
 const links = [
   { href: '#work', label: 'Work' },
+  { href: '/journey-1337/', label: 'Journey' },
   { href: '#about', label: 'About' },
   { href: '#skills', label: 'Skills' },
 ];
 
 export function Header() {
+  const pathname = usePathname();
+  const onHome = pathname === '/';
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState('');
   const menuButton = useRef<HTMLButtonElement>(null);
@@ -38,15 +42,15 @@ export function Header() {
   return (
     <header className="site-header" ref={header}>
       <div className="shell header-inner">
-        <a className="brand group" href="#top" aria-label="Mohamed El Messaadi, back to top" onClick={() => setOpen(false)}>
+        <a className="brand group" href={onHome ? "#top" : "/"} aria-label="Mohamed El Messaadi, back to top" onClick={() => setOpen(false)}>
           <span className="monogram" aria-hidden="true">ME<span>.</span></span>
         </a>
         <button className="menu-button" ref={menuButton} aria-expanded={open} aria-controls="main-navigation" onClick={() => setOpen(!open)}>
           <span>{open ? 'Close' : 'Menu'}</span><span className={`menu-lines ${open ? 'is-open' : ''}`} aria-hidden="true"><i /><i /></span>
         </button>
         <nav id="main-navigation" aria-label="Main navigation" className={`main-nav ${open ? 'is-open' : ''}`}>
-          {links.map(({ href, label }) => <a key={href} href={href} aria-current={active === href ? 'location' : undefined} onClick={() => setOpen(false)}>{label}</a>)}
-          <MagneticLink href="#contact" className="nav-contact button button-outline" onClick={() => setOpen(false)}>Let’s talk</MagneticLink>
+          {links.map(({ href, label }) => <a key={href} href={href.startsWith('#') && !onHome ? `/${href}` : href} aria-current={active === href ? 'location' : undefined} onClick={() => setOpen(false)}>{label}</a>)}
+          <MagneticLink href={onHome ? "#contact" : "/#contact"} className="nav-contact button button-outline" onClick={() => setOpen(false)}>Let’s talk</MagneticLink>
         </nav>
       </div>
     </header>
