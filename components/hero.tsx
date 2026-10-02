@@ -13,7 +13,7 @@ export function Hero() {
         <div className="hero-copy">
           <h1 id="hero-title">Mohamed <span>El Messaadi</span></h1>
           <p className="hero-role">{profile.role}</p>
-          <p className="hero-location"><span aria-hidden="true">📍</span> {profile.location}</p>
+          <p className="hero-location"> {profile.location}</p>
           <p className="hero-description">I build backend services and low-level systems, from non-blocking C++ servers to authenticated APIs.</p>
           <div className="hero-actions flex flex-wrap items-center gap-3" aria-label="Profile and contact links">
             <MagneticLink className="button button-primary" href={`mailto:${profile.email}`}>Email me</MagneticLink>
