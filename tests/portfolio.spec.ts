@@ -37,7 +37,7 @@ for (const width of [320, 390, 768, 1024, 1440]) {
 
 test('hero exposes role, location and working resume', async ({ page }) => {
   await page.goto('/');
-  await expect(page.locator('.hero')).toContainText('Backend & Systems Software Engineer');
+  await expect(page.locator('.hero')).toContainText('Backend Developer');
   await expect(page.locator('.hero')).toContainText('Ben Guerir, Morocco');
   await page.locator('.hero').getByRole('link', { name: 'Resume', exact: true }).click();
   await expect(page).toHaveURL(/\/resume\/$/);
