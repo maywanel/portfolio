@@ -75,7 +75,7 @@ export function HeroBackdrop() {
   const transform = useTransform(scrollYProgress, [0, 1], ['translate3d(0,0,0)', 'translate3d(-5%,90px,0)']);
   return <div className="hero-backdrop" ref={ref} aria-hidden="true">
     <motion.div className="hero-display" style={{ transform: reduce ? 'none' : transform }}>
-      <span>SYSTEMS</span><span>ENGINEER</span>
+      <span>BACKEND</span><span>DEVELOPER</span>
     </motion.div>
   </div>;
 }

@@ -1,7 +1,7 @@
 // Keep public profile details and project evidence in one place.
 export const profile = {
   name: 'Mohamed El Messaadi',
-  role: 'Backend & Systems Software Engineer',
+  role: 'Backend Developer',
   email: 'mouhamedelmessadi@gmail.com',
   github: 'https://github.com/maywanel',
   linkedin: '', // Set only to a confirmed personal profile URL.

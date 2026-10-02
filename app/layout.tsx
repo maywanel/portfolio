@@ -17,11 +17,11 @@ const display = localFont({
 
 export const metadata: Metadata = {
   metadataBase: new URL(profile.url),
-  title: 'Mohamed El Messaadi | Backend & Systems Software Engineer',
-  description: 'Backend & Systems Software Engineer and 1337 student in Ben Guerir, Morocco. Explore my work in HTTP servers, secure APIs, and containerized infrastructure.',
+  title: 'Mohamed El Messaadi | Backend Developer',
+  description: 'Backend Developer and 1337 student in Ben Guerir, Morocco. Explore my work in HTTP servers, secure APIs, and containerized infrastructure.',
   alternates: { canonical: '/' },
-  openGraph: { type: 'website', locale: 'en_US', url: profile.url, siteName: profile.name, title: 'Mohamed El Messaadi | Backend & Systems Software Engineer', description: 'Built below the surface. HTTP servers, secure APIs, and containerized infrastructure.', images: [{ url: '/social-card.png', width: 1200, height: 630, alt: 'Mohamed El Messaadi | Backend & Systems Software Engineer. Built below the surface.' }] },
-  twitter: { card: 'summary_large_image', title: 'Mohamed El Messaadi | Backend & Systems Software Engineer', description: 'HTTP servers, secure APIs, and containerized infrastructure.', images: ['/social-card.png'] },
+  openGraph: { type: 'website', locale: 'en_US', url: profile.url, siteName: profile.name, title: 'Mohamed El Messaadi | Backend Developer', description: 'Built below the surface. HTTP servers, secure APIs, and containerized infrastructure.', images: [{ url: '/social-card.png', width: 1200, height: 630, alt: 'Mohamed El Messaadi | Backend Developer. Built below the surface.' }] },
+  twitter: { card: 'summary_large_image', title: 'Mohamed El Messaadi | Backend Developer', description: 'HTTP servers, secure APIs, and containerized infrastructure.', images: ['/social-card.png'] },
   robots: { index: true, follow: true },
 };
 export const viewport: Viewport = { themeColor: '#111110', colorScheme: 'dark' };
