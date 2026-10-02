@@ -8,7 +8,7 @@ export function Hero() {
       <HeroBackdrop />
       <div className="shell hero-stage">
         <div className="portrait-frame">
-          <Image className="hero-portrait" src="/me.png" width={1089} height={1445} alt="Mohamed El Messaadi" preload />
+          <Image className="hero-portrait" src="/mylogo.png" width={1536} height={1024} alt="Mohamed El Messaadi" preload />
         </div>
         <div className="hero-copy">
           <h1 id="hero-title">Mohamed <span>El Messaadi</span></h1>
