@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { MagneticLink } from './motion';
-import { Arrow } from './icons';
 
 const links = [
   { href: '#work', label: 'Work' },
@@ -47,7 +46,7 @@ export function Header() {
         </button>
         <nav id="main-navigation" aria-label="Main navigation" className={`main-nav ${open ? 'is-open' : ''}`}>
           {links.map(({ href, label }) => <a key={href} href={href} aria-current={active === href ? 'location' : undefined} onClick={() => setOpen(false)}>{label}</a>)}
-          <MagneticLink href="#contact" className="nav-contact button button-outline" onClick={() => setOpen(false)}>Let’s talk <Arrow diagonal width={15} height={15} /></MagneticLink>
+          <MagneticLink href="#contact" className="nav-contact button button-outline" onClick={() => setOpen(false)}>Let’s talk</MagneticLink>
         </nav>
       </div>
     </header>

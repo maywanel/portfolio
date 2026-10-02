@@ -1,4 +1,4 @@
-import { BracketsCurly, Stack, TerminalWindow, ArrowUpRight } from '@phosphor-icons/react/dist/ssr';
+import { BracketsCurly, Stack, TerminalWindow } from '@phosphor-icons/react/dist/ssr';
 import { toolkit } from '@/lib/portfolio';
 import { Reveal } from './motion';
 
@@ -11,7 +11,7 @@ export function Capabilities() {
       {toolkit.map((group, index) => {
         const Icon = icons[index];
         return <Reveal className={`capability capability-${index}`} key={group.name}>
-          <div className="capability-top"><Icon size={34} weight="light" aria-hidden="true" /><ArrowUpRight size={20} weight="light" aria-hidden="true" /></div>
+          <div className="capability-top"><Icon size={34} weight="light" aria-hidden="true" /></div>
           <h3>{group.name}</h3><ul>{group.items.map((item) => <li key={item}>{item}</li>)}</ul>
         </Reveal>;
       })}

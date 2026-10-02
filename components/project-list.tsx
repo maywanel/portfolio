@@ -1,4 +1,4 @@
-import { ArrowUpRight, GitBranch, Globe, Books, LockSimple } from '@phosphor-icons/react/dist/ssr';
+import { GitBranch, Globe, Books, LockSimple } from '@phosphor-icons/react/dist/ssr';
 import { projects } from '@/lib/portfolio';
 import { MagneticLink, Reveal, TiltCard } from './motion';
 
@@ -34,12 +34,12 @@ export function ProjectList() {
           <TiltCard className={`project-card ${index === 0 ? 'project-card-featured' : ''}`} labelId={`project-${project.name}`}>
             <ProjectDiagram name={project.name} />
             <div className="project-content">
-              <div className="project-title-row"><h3 id={`project-${project.name}`}>{project.name}</h3><ArrowUpRight className="project-arrow" size={28} weight="light" aria-hidden="true" /></div>
+              <div className="project-title-row"><h3 id={`project-${project.name}`}>{project.name}</h3></div>
               <p className="project-category">{project.category}</p>
               <p className="project-summary">{project.summary}</p>
               <ul className="tag-list" aria-label={`${project.name} technologies`}>{project.technologies.map((technology) => <li key={technology}>{technology}</li>)}</ul>
               <div className="project-engineering"><h4>Implementation</h4><ul className="implementation-list">{project.implementation.map((item) => <li key={item}>{item}</li>)}</ul></div>
-              {project.href ? <MagneticLink className="text-link project-link" href={project.href}>View repository <ArrowUpRight size={18} aria-hidden="true" /><span className="sr-only"> for {project.name}</span></MagneticLink>
+              {project.href ? <MagneticLink className="text-link project-link" href={project.href}>View repository<span className="sr-only"> for {project.name}</span></MagneticLink>
                 : <p className="project-status"><LockSimple size={15} aria-hidden="true" />{project.status}</p>}
             </div>
           </TiltCard>

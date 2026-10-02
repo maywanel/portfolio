@@ -94,7 +94,6 @@ p { max-width: 65ch; }
 .project-content { padding: 36px; position: relative; z-index: 1; }
 .project-title-row { display: flex; align-items: center; justify-content: space-between; gap: 20px; }
 .project-title-row h3 { font-size: clamp(27px, 2.4vw, 36px); overflow-wrap: anywhere; }
-.project-arrow { flex: none; color: #b0aea5; }
 .project-category { color: var(--muted); font-size: 13px; margin-top: 12px; }
 .project-summary { color: #d0cec6; margin-top: 22px; font-size: 16px; }
 .tag-list { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; padding: 0; margin: 24px 0 28px; }
@@ -275,7 +274,6 @@ p { max-width: 65ch; }
   .capability h3 { font-size: 18px; }
   .capability ul { font-size: 13px; gap: 8px 14px; }
   .capability-top svg:first-child { width: 28px; }
-  .capability-top svg:last-child { display: none; }
   .contact-heading { gap: 20px; align-items: flex-end; }
   .contact-heading h2 { font-size: clamp(43px, 10.5vw, 70px); }
   .contact-orb { width: 60px; height: 60px; margin-bottom: 4px; }

@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { ArrowUpRight } from '@phosphor-icons/react/dist/ssr';
 import { profile } from '@/lib/portfolio';
 import { HeroBackdrop, MagneticLink } from './motion';
 
@@ -17,15 +16,15 @@ export function Hero() {
           <p className="hero-location"><span aria-hidden="true">📍</span> {profile.location}</p>
           <p className="hero-description">I build backend services and low-level systems, from non-blocking C++ servers to authenticated APIs.</p>
           <div className="hero-actions flex flex-wrap items-center gap-3" aria-label="Profile and contact links">
-            <MagneticLink className="button button-primary" href={`mailto:${profile.email}`}>Email me <ArrowUpRight aria-hidden="true" size={17} /></MagneticLink>
-            <MagneticLink className="button button-outline" href={profile.github}>GitHub <ArrowUpRight aria-hidden="true" size={17} /></MagneticLink>
-            <MagneticLink className="button button-outline" href={profile.resume}>Resume <ArrowUpRight aria-hidden="true" size={17} /></MagneticLink>
+            <MagneticLink className="button button-primary" href={`mailto:${profile.email}`}>Email me</MagneticLink>
+            <MagneticLink className="button button-outline" href={profile.github}>GitHub</MagneticLink>
+            <MagneticLink className="button button-outline" href={profile.resume}>Resume</MagneticLink>
           </div>
         </div>
         <div className="hero-side-note">
           <span className="availability"><i aria-hidden="true" /> Open to internships</span>
           <p>Behind every interface,<br />a system that works.</p>
-          <a className="text-link" href="#work">Explore my work <ArrowUpRight aria-hidden="true" size={20} /></a>
+          <a className="text-link" href="#work">Explore my work</a>
         </div>
       </div>
       <div className="shell stats-bar" aria-label="Background at a glance">
