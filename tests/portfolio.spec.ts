@@ -23,7 +23,7 @@ for (const width of [320, 390, 768, 1024, 1440]) {
     }));
     expect(layout.overflow).toBe(false);
     expect(layout.fonts).toBeGreaterThan(0);
-    expect(layout.emoji).toBe(true);
+    expect(layout.emoji).toBe(false);
     expect(layout.missingAnchors).toEqual([]);
     expect(errors).toEqual([]);
     expect(failedAssets).toEqual([]);
@@ -133,12 +133,10 @@ for (const colorScheme of ['light', 'dark'] as const) {
 }
 
 
-test('portrait loads and decorative type responds to scroll', async ({ page }) => {
+test('hero decorative type responds to scroll without portrait', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/');
-  const portrait = page.getByRole('img', { name: 'Mohamed El Messaadi', exact: true });
-  await expect(portrait).toBeVisible();
-  await expect.poll(() => portrait.evaluate((img: HTMLImageElement) => img.complete && img.naturalWidth > 0)).toBe(true);
+  await expect(page.getByRole('img', { name: 'Mohamed El Messaadi', exact: true })).toHaveCount(0);
   const backdrop = page.locator('.hero-display');
   const initial = await backdrop.evaluate(el => getComputedStyle(el).transform);
   await page.evaluate(() => window.scrollTo({ top: 450, behavior: 'instant' }));

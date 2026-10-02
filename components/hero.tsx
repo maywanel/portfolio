@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { profile } from '@/lib/portfolio';
 import { HeroBackdrop, MagneticLink } from './motion';
 
@@ -7,9 +6,6 @@ export function Hero() {
     <section id="top" className="hero section-anchor" aria-labelledby="hero-title">
       <HeroBackdrop />
       <div className="shell hero-stage">
-        {/* <div className="portrait-frame">
-          <Image className="hero-portrait" src="/mylogo.png" width={1536} height={1024} alt="Mohamed El Messaadi" preload />
-        </div> */}
         <div className="hero-copy">
           <h1 id="hero-title">Mohamed <span>El Messaadi</span></h1>
           <p className="hero-role">{profile.role}</p>
