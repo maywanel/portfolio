@@ -9,7 +9,6 @@ const links = [
   { href: '#about', label: 'About' },
   { href: '#skills', label: 'Skills' },
   { href: '#contact', label: 'Let’s talk' },
-  { href: '/journey-1337/', label: 'Journey' },
 ];
 
 export function Header() {
