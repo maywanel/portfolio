@@ -43,9 +43,11 @@ export function JourneyVideo({ children }: { children: ReactNode }) {
     return () => { observer.disconnect(); cancelAnimationFrame(frame); };
   }, [reduce, update]);
   return <section ref={section} className="journey-video-hero" aria-labelledby="journey-title">
-    <div className="journey-video-sticky">
+    <div className="journey-video-media" aria-hidden="true">
       {!failed && <video ref={video} className="journey-video" src="/journey-hero.mp4" poster="/journey-hero.jpg" muted playsInline preload="auto" aria-hidden="true" onLoadedData={update} onSeeked={seek} onError={() => setFailed(true)} />}
       <div className="journey-video-shade" />
+    </div>
+    <div className="journey-video-sticky">
       <div className="journey-hero shell">{children}</div>
     </div>
   </section>;

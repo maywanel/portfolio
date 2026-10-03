@@ -42,8 +42,7 @@ p { max-width: 65ch; }
 .site-header { position: sticky; top: 0; z-index: 10; background: rgb(17 17 16 / .95); border-bottom: 1px solid rgb(255 255 255 / .08); backdrop-filter: blur(16px); }
 .header-inner { min-height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .brand { display: inline-flex; min-width: 52px; min-height: 48px; align-items: center; }
-.monogram { font-family: var(--font-display), sans-serif; font-size: 32px; letter-spacing: -.1em; line-height: 1; }
-.monogram > span { color: #aaa79b; }
+.brand-logo { display: block; height: 100px; width: auto; object-fit: contain; }
 .main-nav { display: flex; align-items: center; gap: 36px; }
 .main-nav > a { min-height: 44px; display: inline-flex; align-items: center; gap: 10px; font-size: 14px; color: var(--muted); }
 .main-nav > a:hover, .main-nav > a[aria-current] { color: var(--paper); text-decoration: underline; }
@@ -228,7 +227,7 @@ p { max-width: 65ch; }
   html { scroll-padding-top: 94px; }
   .shell { width: calc(100% - 40px); }
   .header-inner { min-height: 76px; }
-  .monogram { font-size: 28px; }
+  .brand-logo { height: 24px; }
   .menu-button { display: inline-flex; align-items: center; min-height: 44px; padding: 8px; border: 0; background: transparent; color: var(--paper); font-size: 14px; }
   .main-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg); padding: 12px 20px 20px; border-bottom: 1px solid var(--line); }
   .main-nav.is-open { display: flex; flex-direction: column; align-items: stretch; gap: 6px; }
@@ -329,7 +328,7 @@ p { max-width: 65ch; }
   @page { margin: 15mm; }
 }
 
-.journey-page { overflow: clip; }
+.journey-page { overflow: clip; isolation: isolate; position: relative; }
 .journey-hero { min-height: min(820px, calc(100svh - 88px)); padding-block: 40px 64px; display: flex; flex-direction: column; justify-content: space-between; }
 .journey-back { align-self: flex-start; color: var(--muted); }
 .journey-hero > .motion-reveal { width: 100%; }
@@ -371,14 +370,16 @@ p { max-width: 65ch; }
 
 /* The opening film follows the reader; the path widens as the projects grow. */
 .journey-video-hero { position: relative; height: 180svh; }
-.journey-video-sticky { position: sticky; top: 88px; height: calc(100svh - 88px); isolation: isolate; overflow: hidden; background: #111110 url('/journey-hero.jpg') center / cover; }
+.journey-video-sticky { position: sticky; top: 88px; height: calc(100svh - 88px); overflow: hidden; }
 .journey-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; }
+.journey-video-media { position: fixed; inset: 88px 0 0; z-index: -1; isolation: isolate; background: #111110 url('/journey-hero.jpg') center / cover; }
 .journey-video-shade { position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgb(17 17 16 / .82), rgb(17 17 16 / .2)), linear-gradient(0deg, #111110, transparent 60%); }
 .journey-video-hero .journey-hero { height: 100%; min-height: 0; padding-block: 24px 36px; }
 .journey-video-hero h1 { font-size: clamp(58px, 8.8vw, 128px); margin-top: 18px; }
 .journey-video-hero h1 span { color: #d1cfc8; }
 .journey-video-hero .journey-intro { margin-top: 28px; }
 .journey-video-hero .journey-intro > p { font-size: clamp(16px, 1.6vw, 21px); }
+.journey-content { position: relative; z-index: 1; background: var(--bg); }
 .journey-tape { position: relative; overflow: hidden; border-block: 1px solid var(--line); background: var(--surface); }
 .journey-tape-track { width: max-content; display: flex; animation: journey-tape 40s linear infinite; }
 .journey-tape-copy { display: flex; align-items: center; flex-shrink: 0; }
@@ -421,8 +422,33 @@ p { max-width: 65ch; }
   .journey-stage .journey-proof { margin-top: 16px; }
   .journey-path.is-horizontal .journey-path-heading h2 { font-size: 36px; }
 }
+/* Keep the journey proportionate on wide desktop viewports, including 1440p and 4K. */
+@media (min-width: 1600px) {
+  .journey-page { --journey-content-width: min(1920px, 88vw); }
+  .journey-page .shell, .journey-path-track { width: var(--journey-content-width); }
+  .journey-video-hero .journey-hero { padding-block: clamp(32px, 3vh, 64px); }
+  .journey-video-hero .journey-hero > .motion-reveal { margin-block: auto; }
+  .journey-video-hero h1 { font-size: clamp(128px, 6.25vw, 192px); }
+  .journey-video-hero .journey-intro > p { font-size: clamp(21px, 1vw, 26px); }
+  .journey-date, .journey-kicker { font-size: 12px; }
+  .journey-scroll { font-size: 16px; }
+  .journey-path.is-horizontal .journey-path-track { gap: 32px; }
+  .journey-path.is-horizontal .journey-stage { flex-basis: min(640px, 30vw); }
+  .journey-end-row > p { font-size: 20px; }
+}
+@media (min-width: 1600px) and (min-height: 900px) {
+  .journey-stage { padding: 32px 36px; }
+  .journey-stage-body { font-size: 18px; }
+  .journey-stage-lesson { font-size: 19px; }
+  .journey-stage-period, .journey-stage .journey-proof { font-size: 13px; }
+  .journey-path.is-horizontal .journey-path-heading h2 { font-size: clamp(58px, 3vw, 80px); }
+  .journey-path-heading > p { font-size: 20px; }
+  .journey-path.is-horizontal .journey-path-window { margin-top: 40px; }
+  .journey-path.is-horizontal .journey-stage .journey-number { font-size: 64px; }
+}
 @media (prefers-reduced-motion: reduce) {
   .journey-video-hero { height: auto; }
+  .journey-video-media { position: absolute; inset: 0; }
   .journey-video-sticky { position: relative; top: auto; min-height: 650px; height: auto; }
   .journey-video-hero .journey-hero { min-height: 650px; }
   .journey-tape-track { animation: none; width: auto; }

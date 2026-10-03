@@ -12,21 +12,21 @@ export const metadata: Metadata = {
 };
 
 const chapters = [
-  { number: '01', period: 'MEMORY & PRECISION', title: 'libft', icon: TerminalWindow,
-    body: 'Rebuilding a C library means starting with the smallest pieces: strings, linked lists, allocation, and pointers. There is nowhere to hide a misunderstanding of memory.',
-    proof: 'C · pointers · memory ownership', lesson: 'Learn to make one function dependable before building on top of it.' },
-  { number: '02', period: 'PROCESSES & UNIX', title: 'pipex', icon: Cpu,
-    body: 'A shell pipeline looks simple until you build it. Forking processes, redirecting file descriptors, and connecting pipes turns Unix from commands I use into a system I understand.',
+  { number: '01', period: 'MEMORY & PRECISION', title: 'the wake up', icon: TerminalWindow,
+    body: 'The first steps in C are about understanding memory and how it works. It\'s not just about writing code, but about thinking about the system and how it behaves.',
+    proof: 'C · pointers · memory ownership', lesson: 'Learn to make one function dependable and bulletproof before building on top of it.' },
+  { number: '02', period: 'PROCESSES & UNIX & GRAPHICS', title: 'getting into the flow', icon: Cpu,
+    body: 'the next projects intrduce processes, Unix and graphics. the challenge is to understand how the pieces fit together, and how to handle failure in a system that is more than just a single program.',
     proof: 'fork · execve · pipes · file descriptors', lesson: 'A program has to handle failure as carefully as the happy path.' },
-  { number: '03', period: 'CONCURRENCY & DESIGN', title: 'Beyond one process.', icon: GitBranch,
-    body: 'Shells, concurrent programs, and C++ exercises add a new kind of difficulty: coordinating shared state, avoiding deadlocks, and designing abstractions that stay understandable.',
-    proof: 'C++ · synchronization · parsing · debugging', lesson: 'Correct pieces still need careful coordination to become a correct system.' },
-  { number: '04', period: 'NETWORKS & PROTOCOLS', title: 'webserv', icon: Cpu,
-    body: 'Building an HTTP server in C++98 brings everything together: sockets, request parsing, non-blocking I/O, epoll, and CGI. Multiple clients expose every assumption about timing and state.',
-    proof: 'C++98 · HTTP/1.1 · sockets · epoll · CGI', lesson: 'Think in states and lifecycles, not just in functions.' },
-  { number: '05', period: 'A COMPLETE APPLICATION', title: 'ft_transcendence', icon: BracketsCurly,
-    body: 'The challenge grows into a full application. TypeScript, Fastify, PostgreSQL, and OAuth connect APIs, authentication, persistent data, and a user-facing experience into one team project.',
-    proof: 'TypeScript · Fastify · SQL · OAuth · Docker', lesson: 'Architecture, integration, and communication matter as much as code.' },
+  { number: '03', period: 'CONCURRENCY & DESIGN', title: 'new challenges', icon: GitBranch,
+    body: 'the next projects intrduce new domains: networking, concurrency, and design. the challenge is to understand how the pieces fit together, and how to handle failure in a system',
+    proof: 'C++ · synchronization · parsing · networking', lesson: 'Correct pieces still need careful coordination to become a correct system.' },
+  { number: '04', period: 'NETWORKS & PROTOCOLS', title: 'learning is a way of life', icon: Cpu,
+    body: 'Building an HTTP server in C++98 and managing a containerized application. the hard part is to find the right informations and not going deep into the rabbit hole of details.',
+    proof: 'C++98 · sockets · Docker · containers', lesson: 'Think in states and lifecycles, not just in functions.' },
+  { number: '05', period: 'A COMPLETE APPLICATION', title: 'the end of the beginning', icon: BracketsCurly,
+    body: 'The final project is a complete application with a backend, database, and authentication. the challenge is to integrate all the pieces you\'ve learned and make them work together.',
+    proof: 'JavaScript · Fastify · SQL · OAuth · Docker', lesson: 'Architecture, integration, and communication matter as much as code.' },
   { number: '06', period: 'THE CORRECTION SYSTEM', title: 'Defend every decision.', icon: GitBranch,
     body: 'Writing the code is only part of the work. Peer corrections mean explaining the implementation, testing edge cases, and confronting leaks, crashes, and broken assumptions. A fragile solution sends you back to the editor.',
     proof: 'Peer review · edge cases · accountability', lesson: 'The hard part becomes the habit: test carefully, explain clearly, and improve.' },
@@ -51,26 +51,28 @@ export default function JourneyPage() {
         </Reveal>
       </JourneyVideo>
 
-      <JourneyTape concepts={concepts} />
-      <JourneyPath>
-        {chapters.map(({ number, period, title, icon: Icon, body, proof, lesson }) => (
-          <article key={number} className="journey-stage">
-            <div className="journey-stage-top"><span className="journey-number">{number}</span><Icon size={30} weight="light" aria-hidden="true" /></div>
-            <p className="journey-stage-period">{period}</p>
-            <h3>{title}</h3><p className="journey-stage-body">{body}</p>
-            <p className="journey-stage-lesson">{lesson}</p><span className="journey-proof">{proof}</span>
-          </article>
-        ))}
-      </JourneyPath>
+      <div className="journey-content">
+        <JourneyTape concepts={concepts} />
+        <JourneyPath>
+          {chapters.map(({ number, period, title, icon: Icon, body, proof, lesson }) => (
+            <article key={number} className="journey-stage">
+              <div className="journey-stage-top"><span className="journey-number">{number}</span><Icon size={30} weight="light" aria-hidden="true" /></div>
+              <p className="journey-stage-period">{period}</p>
+              <h3>{title}</h3><p className="journey-stage-body">{body}</p>
+              <p className="journey-stage-lesson">{lesson}</p><span className="journey-proof">{proof}</span>
+            </article>
+          ))}
+        </JourneyPath>
 
-      <section className="journey-end shell" aria-labelledby="journey-end-title">
-        <Reveal>
-          <p className="journey-kicker">THE NEXT CHAPTER</p>
-          <h2 id="journey-end-title">Still learning.<br /><span>Ready to contribute.</span></h2>
-          <div className="journey-end-row"><p>I’m looking for a backend internship where I can keep learning and help build dependable systems.</p><Link className="button button-primary" href={`mailto:${profile.email}`}>Get in touch <ArrowUpRight size={18} aria-hidden="true" /></Link></div>
-        </Reveal>
-      </section>
-      <footer className="shell journey-footer"><span>© 2026 {profile.name}</span><Link className="text-link" href="/">Back to portfolio <ArrowUpRight size={16} aria-hidden="true" /></Link></footer>
+        <section className="journey-end shell" aria-labelledby="journey-end-title">
+          <Reveal>
+            <p className="journey-kicker">THE NEXT CHAPTER</p>
+            <h2 id="journey-end-title">Still learning.<br /><span>Ready to contribute.</span></h2>
+            <div className="journey-end-row"><p>I’m looking for a backend internship where I can keep learning and help build dependable systems.</p><Link className="button button-primary" href={`mailto:${profile.email}`}>Get in touch <ArrowUpRight size={18} aria-hidden="true" /></Link></div>
+          </Reveal>
+        </section>
+        <footer className="shell journey-footer"><span>© 2026 {profile.name}</span><Link className="text-link" href="/">Back to portfolio <ArrowUpRight size={16} aria-hidden="true" /></Link></footer>
+      </div>
     </main>
   </>;
 }
