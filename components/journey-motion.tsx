@@ -23,7 +23,8 @@ export function JourneyVideo({ children }: { children: ReactNode }) {
   const seek = useCallback(() => {
     const element = video.current;
     if (!element || element.readyState < 1 || element.seeking) return;
-    const time = reduce ? 0.5 : Math.min(desired.current * 2, Math.max(0, element.duration - 0.04), 2);
+    // The served clip contains seconds 1–3 of hero.mp4, mapped to local time 0–2.
+    const time = reduce ? 0 : Math.min(desired.current * 2, Math.max(0, element.duration - 0.04), 2);
     if (Math.abs(element.currentTime - time) > 0.015) element.currentTime = time;
   }, [reduce]);
   const update = useCallback(() => {

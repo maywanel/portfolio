@@ -12,7 +12,7 @@ export default function Home() {
   return <>
     <a className="skip-link" href="#main">Skip to content</a>
     <Header />
-    <main id="main" tabIndex={-1}>
+    <main id="main" className="home-page" tabIndex={-1}>
       <Hero />
       <ProjectList />
       <section id="about" className="about-section section-anchor" aria-labelledby="about-title">

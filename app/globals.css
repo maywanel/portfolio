@@ -456,3 +456,63 @@ p { max-width: 65ch; }
   .journey-tape-copy[aria-hidden='true'] { display: none; }
   .journey-tape-copy span { padding: 12px 20px; font-size: 18px; }
 }
+
+/* Match the journey's wide-screen canvas while keeping prose readable. */
+@media screen and (min-width: 1600px) {
+  .home-page {
+    --section-space: clamp(140px, 7vw, 200px);
+    --home-body-size: clamp(18px, .85vw, 22px);
+    --home-small-size: clamp(15px, .65vw, 18px);
+    font-size: var(--home-body-size);
+  }
+  .home-page .shell, .home-header .shell { width: min(1920px, 88vw); }
+  .home-header .main-nav { gap: clamp(36px, 2vw, 56px); }
+  .home-header .main-nav > a { font-size: clamp(15px, .7vw, 18px); }
+  .home-page h2 { font-size: clamp(88px, 4.5vw, 120px); }
+  .home-page .hero-display { font-size: clamp(290px, 16vw, 390px); padding-top: clamp(32px, 3vh, 64px); }
+  .home-page .hero-backdrop { height: 100%; }
+  .home-page .hero-stage {
+    min-height: clamp(780px, calc(100svh - 270px), 1400px);
+    padding-block: clamp(400px, 24vw, 620px) clamp(64px, 5vh, 110px);
+  }
+  .home-page .hero-copy { max-width: 580px; }
+  .home-page .hero-copy h1 { font-size: clamp(54px, 3vw, 80px); }
+  .home-page .hero-role { font-size: clamp(20px, 1vw, 26px); }
+  .home-page .hero-location { font-size: var(--home-small-size); }
+  .home-page .hero-description { font-size: var(--home-body-size); }
+  .home-page .hero-actions { gap: 16px; margin-top: 32px; }
+  .home-page .button { min-height: 54px; font-size: clamp(16px, .75vw, 20px); padding: 14px 28px; }
+  .home-page .hero-side-note { width: 260px; bottom: clamp(90px, 7vh, 150px); }
+  .home-page .hero-side-note > p { font-size: var(--home-body-size); }
+  .home-page .hero-side-note .text-link, .home-page .availability { font-size: var(--home-small-size); }
+  .home-page .stats-bar { padding-block: clamp(38px, 2vw, 56px); }
+  .home-page .stats-bar strong { font-size: clamp(46px, 2.5vw, 64px); }
+  .home-page .stats-bar span { font-size: var(--home-small-size); }
+  .home-page .editorial-heading { margin-bottom: clamp(56px, 3vw, 80px); }
+  .home-page .editorial-heading > p { font-size: var(--home-body-size); }
+  .home-page .project-grid { gap: clamp(28px, 1.6vw, 48px); }
+  .home-page .project-content { padding: clamp(36px, 2.2vw, 64px); }
+  .home-page .project-title-row h3 { font-size: clamp(36px, 2vw, 48px); }
+  .home-page .project-summary { font-size: var(--home-body-size); max-width: 55ch; }
+  .home-page :is(.project-category, .project-engineering h4, .implementation-list, .project-link, .project-status) { font-size: var(--home-small-size); }
+  .home-page .tag-list li { font-size: clamp(13px, .6vw, 16px); }
+  .home-page .project-art { height: clamp(320px, 18vw, 440px); }
+  .home-page .project-card-featured .project-art { height: 100%; min-height: 560px; }
+  .home-page .network-node { font-size: var(--home-small-size); }
+  .home-page .network-core { width: 160px; height: 160px; font-size: 16px; }
+  .home-page .art-caption { font-size: var(--home-small-size); }
+  .home-page :is(.about-layout, .contact-layout) { gap: clamp(80px, 5vw, 160px); }
+  .home-page .about-copy p { font-size: var(--home-body-size); max-width: 55ch; }
+  .home-page .about-copy .about-lead { font-size: clamp(32px, 1.6vw, 44px); }
+  .home-page .education-line { font-size: var(--home-small-size); }
+  .home-page .capabilities-grid { gap: clamp(20px, 1.4vw, 40px); }
+  .home-page .capability { padding: clamp(32px, 2vw, 56px); }
+  .home-page .capability h3 { font-size: clamp(24px, 1.2vw, 32px); }
+  .home-page .capability ul { font-size: var(--home-body-size); gap: 14px 24px; }
+  .home-page .capability-top { margin-bottom: clamp(56px, 3vw, 88px); }
+  .home-page .contact-heading h2 { font-size: clamp(122px, 6.5vw, 176px); }
+  .home-page .contact-orb { width: clamp(132px, 7vw, 180px); height: clamp(132px, 7vw, 180px); }
+  .home-page .email-link { font-size: clamp(23px, 1.2vw, 32px); }
+  .home-page :is(.copy-button, .contact-links, .site-footer) { font-size: var(--home-small-size); }
+  .home-page .site-footer { margin-top: clamp(88px, 5vw, 140px); }
+}

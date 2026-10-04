@@ -1,16 +1,31 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
-for (const width of [320, 390, 768, 1024, 1440]) {
+for (const width of [320, 390, 768, 1024, 1440, 1920, 2560, 3440, 3840]) {
   test(`readable layout at ${width}px with local assets`, async ({ page }) => {
     const errors: string[] = [];
     const failedAssets: string[] = [];
     page.on('pageerror', (error) => errors.push(error.message));
     page.on('response', (response) => { if (response.status() >= 400) failedAssets.push(response.url()); });
-    await page.setViewportSize({ width, height: 900 });
+    const height = width === 3440 ? 1440 : width >= 1920 ? width * 9 / 16 : 900;
+    await page.setViewportSize({ width, height });
     await page.goto('/');
     await page.evaluate(() => document.fonts.ready);
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('Mohamed El Messaadi');
+    if (width >= 1920) {
+      const hero = await page.locator('.hero-stage').boundingBox();
+      const header = await page.locator('.header-inner').boundingBox();
+      const actions = await page.locator('.hero-actions').boundingBox();
+      expect(hero!.width).toBeGreaterThan(1320);
+      expect(hero!.width).toBeLessThanOrEqual(1920);
+      expect(header!.x).toBeCloseTo(hero!.x, 0);
+      expect(actions!.y + actions!.height).toBeLessThanOrEqual(height);
+      for (const selector of ['.project-content', '.capability', '.about-copy', '.contact-actions']) {
+        for (const element of await page.locator(selector).all()) {
+          expect(await element.evaluate(el => el.scrollWidth <= el.clientWidth)).toBe(true);
+        }
+      }
+    }
     for (const id of ['work', 'about', 'contact']) {
       await page.locator(`#${id}`).scrollIntoViewIfNeeded();
       await expect(page.locator(`#${id}`)).toBeVisible();

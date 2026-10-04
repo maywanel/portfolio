@@ -40,7 +40,7 @@ export function Header() {
   }, []);
 
   return (
-    <header className="site-header" ref={header}>
+    <header className={`site-header${onHome ? ' home-header' : ''}`} ref={header}>
       <div className="shell header-inner">
         <a className="brand group" href={onHome ? "#top" : "/"} aria-label="Mohamed El Messaadi, back to top" onClick={() => setOpen(false)}>
           <img className="brand-logo" src="/mylogo.png" alt="Mohamed El Messaadi logo" />
