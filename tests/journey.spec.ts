@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test';
 
-test('journey film follows scrolling in both directions within two seconds', async ({ page }) => {
+test('journey film follows scrolling in both directions within the 2.5-second clip', async ({ page }) => {
   await page.goto('/journey-1337/');
   const video = page.locator('.journey-video');
   await expect.poll(() => video.evaluate((v: HTMLVideoElement) => v.readyState)).toBeGreaterThanOrEqual(2);
   await page.evaluate(() => window.scrollTo({ top: 700, behavior: 'instant' }));
   await expect.poll(() => video.evaluate((v: HTMLVideoElement) => v.currentTime)).toBeGreaterThan(0.4);
   const forward = await video.evaluate((v: HTMLVideoElement) => v.currentTime);
-  expect(forward).toBeLessThanOrEqual(2);
+  expect(forward).toBeLessThanOrEqual(2.5);
   await page.evaluate(() => window.scrollTo({ top: 150, behavior: 'instant' }));
   await expect.poll(() => video.evaluate((v: HTMLVideoElement) => v.currentTime)).toBeLessThan(forward);
   const path = page.locator('.journey-path');

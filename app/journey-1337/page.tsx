@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { ArrowDown, ArrowLeft, ArrowUpRight, BracketsCurly, Cpu, GitBranch, TerminalWindow } from '@phosphor-icons/react/dist/ssr';
 import { Header } from '@/components/header';
 import { Reveal } from '@/components/motion';
-import { JourneyVideo, JourneyPath, JourneyTape } from '@/components/journey-motion';
+import { JourneyVideo, JourneyPath } from '@/components/journey-motion';
 import { profile } from '@/lib/portfolio';
 
 export const metadata: Metadata = {
@@ -52,8 +52,7 @@ export default function JourneyPage() {
       </JourneyVideo>
 
       <div className="journey-content">
-        <JourneyTape concepts={concepts} />
-        <JourneyPath>
+        <JourneyPath concepts={concepts}>
           {chapters.map(({ number, period, title, icon: Icon, body, proof, lesson }) => (
             <article key={number} className="journey-stage">
               <div className="journey-stage-top"><span className="journey-number">{number}</span><Icon size={30} weight="light" aria-hidden="true" /></div>

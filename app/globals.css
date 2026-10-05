@@ -516,3 +516,22 @@ p { max-width: 65ch; }
   .home-page :is(.copy-button, .contact-links, .site-footer) { font-size: var(--home-small-size); }
   .home-page .site-footer { margin-top: clamp(88px, 5vw, 140px); }
 }
+
+/* The tape stays with the path and leaves with its final chapter. */
+.journey-path {
+  --path-header-height: 101px;
+  --path-tape-height: calc(clamp(20px, 2vw, 28px) * 1.65 + 42px);
+}
+.journey-path > .journey-tape { position: sticky; top: var(--path-header-height); z-index: 3; }
+@media (min-width: 900px) {
+  .journey-path.is-horizontal .journey-path-sticky {
+    top: calc(var(--path-header-height) + var(--path-tape-height));
+    height: calc(100svh - var(--path-header-height) - var(--path-tape-height));
+  }
+}
+@media (max-width: 700px) {
+  .journey-path { --path-header-height: 77px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .journey-path > .journey-tape { position: relative; top: auto; }
+}

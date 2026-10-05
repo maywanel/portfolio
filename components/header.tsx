@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
+import Image from 'next/image';
 import { MagneticLink } from './motion';
 
 const links = [
@@ -43,7 +44,7 @@ export function Header() {
     <header className={`site-header${onHome ? ' home-header' : ''}`} ref={header}>
       <div className="shell header-inner">
         <a className="brand group" href={onHome ? "#top" : "/"} aria-label="Mohamed El Messaadi, back to top" onClick={() => setOpen(false)}>
-          <img className="brand-logo" src="/mylogo.png" alt="Mohamed El Messaadi logo" />
+          <Image className="brand-logo" src="/mylogo.png" alt="Mohamed El Messaadi logo" width={160} height={40} priority />
         </a>
         <button className="menu-button" ref={menuButton} aria-expanded={open} aria-controls="main-navigation" onClick={() => setOpen(!open)}>
           <span>{open ? 'Close' : 'Menu'}</span><span className={`menu-lines ${open ? 'is-open' : ''}`} aria-hidden="true"><i /><i /></span>

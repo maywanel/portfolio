@@ -23,8 +23,8 @@ export function JourneyVideo({ children }: { children: ReactNode }) {
   const seek = useCallback(() => {
     const element = video.current;
     if (!element || element.readyState < 1 || element.seeking) return;
-    // The served clip contains seconds 1–3 of hero.mp4, mapped to local time 0–2.
-    const time = reduce ? 0 : Math.min(desired.current * 2, Math.max(0, element.duration - 0.04), 2);
+    const endTime = Math.max(0, element.duration - 1 / 24);
+    const time = reduce ? 0 : desired.current * endTime;
     if (Math.abs(element.currentTime - time) > 0.015) element.currentTime = time;
   }, [reduce]);
   const update = useCallback(() => {
@@ -54,7 +54,7 @@ export function JourneyVideo({ children }: { children: ReactNode }) {
   </section>;
 }
 
-export function JourneyPath({ children }: { children: ReactNode }) {
+export function JourneyPath({ children, concepts }: { children: ReactNode; concepts: string[] }) {
   const section = useRef<HTMLElement>(null);
   const track = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
@@ -92,6 +92,7 @@ export function JourneyPath({ children }: { children: ReactNode }) {
     return () => { observer.disconnect(); cancelAnimationFrame(frame); };
   }, [horizontal, scrollYProgress]);
   return <section id="chapters" ref={section} className={`journey-path ${horizontal ? 'is-horizontal' : ''}`} style={travel ? { height: `calc(100svh + ${travel}px)` } : undefined} aria-labelledby="path-title">
+    <JourneyTape concepts={concepts} />
     <div className="journey-path-sticky">
       <div className="shell journey-path-heading"><h2 id="path-title">Small functions.<br /><span> Real systems.</span></h2><p>Each project raises the stakes. Each correction makes the understanding deeper.</p></div>
       <div className="journey-path-window"><motion.div ref={track} className="journey-path-track" style={{ transform: travel ? transform : 'none' }}>{children}</motion.div></div>
