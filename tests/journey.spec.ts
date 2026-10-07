@@ -1,15 +1,16 @@
 import { test, expect } from '@playwright/test';
 
-test('journey film follows scrolling in both directions within the 2.5-second clip', async ({ page }) => {
+test('journey image stays pinned while the hero copy and next section scroll over it', async ({ page }) => {
   await page.goto('/journey-1337/');
-  const video = page.locator('.journey-video');
-  await expect.poll(() => video.evaluate((v: HTMLVideoElement) => v.readyState)).toBeGreaterThanOrEqual(2);
+  const image = page.locator('.journey-image');
+  await expect.poll(() => image.evaluate((el) => getComputedStyle(el).backgroundImage)).toContain('journey-1337.webp');
+  const heroCopy = page.locator('.journey-back');
+  const initialCopyY = (await heroCopy.boundingBox())!.y;
   await page.evaluate(() => window.scrollTo({ top: 700, behavior: 'instant' }));
-  await expect.poll(() => video.evaluate((v: HTMLVideoElement) => v.currentTime)).toBeGreaterThan(0.4);
-  const forward = await video.evaluate((v: HTMLVideoElement) => v.currentTime);
-  expect(forward).toBeLessThanOrEqual(2.5);
-  await page.evaluate(() => window.scrollTo({ top: 150, behavior: 'instant' }));
-  await expect.poll(() => video.evaluate((v: HTMLVideoElement) => v.currentTime)).toBeLessThan(forward);
+  const pinnedImageY = (await page.locator('.journey-image-sticky').boundingBox())!.y;
+  expect(pinnedImageY).toBeCloseTo(88, 0);
+  expect((await heroCopy.boundingBox())!.y).toBeLessThan(initialCopyY - 500);
+  await expect(page.locator('.journey-content')).toBeInViewport();
   const path = page.locator('.journey-path');
   await expect(path).toHaveClass(/is-horizontal/);
   await page.evaluate(() => window.scrollTo({ top: document.querySelector('#chapters')!.getBoundingClientRect().top + window.scrollY + 900, behavior: 'instant' }));

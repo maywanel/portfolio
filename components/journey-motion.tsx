@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { motion, useMotionValue, useTransform } from 'framer-motion';
 
 function useReducedMotion() {
@@ -14,43 +14,13 @@ function useReducedMotion() {
   return reduce;
 }
 
-export function JourneyVideo({ children }: { children: ReactNode }) {
-  const section = useRef<HTMLElement>(null);
-  const video = useRef<HTMLVideoElement>(null);
-  const reduce = useReducedMotion();
-  const [failed, setFailed] = useState(false);
-  const desired = useRef(0);
-  const seek = useCallback(() => {
-    const element = video.current;
-    if (!element || element.readyState < 1 || element.seeking) return;
-    const endTime = Math.max(0, element.duration - 1 / 24);
-    const time = reduce ? 0 : desired.current * endTime;
-    if (Math.abs(element.currentTime - time) > 0.015) element.currentTime = time;
-  }, [reduce]);
-  const update = useCallback(() => {
-    const bounds = section.current?.getBoundingClientRect();
-    if (bounds) desired.current = Math.max(0, Math.min(1, (88 - bounds.top) / Math.max(1, bounds.height - window.innerHeight + 88)));
-    seek();
-  }, [seek]);
-  useEffect(() => {
-    let frame = 0;
-    const tick = () => { update(); frame = requestAnimationFrame(tick); };
-    const observer = new IntersectionObserver(([entry]) => {
-      cancelAnimationFrame(frame);
-      if (entry.isIntersecting && !reduce) tick();
-      else update();
-    });
-    if (section.current) observer.observe(section.current);
-    return () => { observer.disconnect(); cancelAnimationFrame(frame); };
-  }, [reduce, update]);
-  return <section ref={section} className="journey-video-hero" aria-labelledby="journey-title">
-    <div className="journey-video-media" aria-hidden="true">
-      {!failed && <video ref={video} className="journey-video" src="/journey-hero.mp4" poster="/journey-hero.jpg" muted playsInline preload="auto" aria-hidden="true" onLoadedData={update} onSeeked={seek} onError={() => setFailed(true)} />}
-      <div className="journey-video-shade" />
+export function JourneyHero({ children }: { children: ReactNode }) {
+  return <section className="journey-image-hero" aria-labelledby="journey-title">
+    <div className="journey-image-sticky">
+      <div className="journey-image" aria-hidden="true" />
+      <div className="journey-image-shade" aria-hidden="true" />
     </div>
-    <div className="journey-video-sticky">
-      <div className="journey-hero shell">{children}</div>
-    </div>
+    <div className="journey-hero shell">{children}</div>
   </section>;
 }
 

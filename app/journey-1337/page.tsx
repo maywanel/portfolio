@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { ArrowDown, ArrowLeft, ArrowUpRight, BracketsCurly, Cpu, GitBranch, TerminalWindow } from '@phosphor-icons/react/dist/ssr';
 import { Header } from '@/components/header';
 import { Reveal } from '@/components/motion';
-import { JourneyVideo, JourneyPath } from '@/components/journey-motion';
+import { JourneyHero, JourneyPath } from '@/components/journey-motion';
 import { profile } from '@/lib/portfolio';
 
 export const metadata: Metadata = {
@@ -38,7 +38,7 @@ export default function JourneyPage() {
     <a className="skip-link" href="#main">Skip to content</a>
     <Header />
     <main id="main" className="journey-page" tabIndex={-1}>
-      <JourneyVideo>
+      <JourneyHero>
         <Link className="text-link journey-back" href="/"><ArrowLeft size={17} aria-hidden="true" /> Back to portfolio</Link>
         <Reveal>
           <p className="journey-kicker">1337 CODING SCHOOL · 42 NETWORK</p>
@@ -49,7 +49,7 @@ export default function JourneyPage() {
           </div>
           <a className="journey-scroll" href="#chapters">Follow the path <ArrowDown size={16} aria-hidden="true" /></a>
         </Reveal>
-      </JourneyVideo>
+      </JourneyHero>
 
       <div className="journey-content">
         <JourneyPath concepts={concepts}>
