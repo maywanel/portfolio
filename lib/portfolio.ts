@@ -27,12 +27,12 @@ export const projects: Project[] = [
     category: 'Backend architecture',
     status: 'In development · Private repository',
     summary: 'Backend development for a collaborative platform with organization multi-tenancy and real-time features.',
-    technologies: ['TypeScript', 'Fastify', 'PostgreSQL', 'OAuth 2.0'],
+    technologies: ['JavaScript', 'Fastify', 'PostgreSQL', 'OAuth 2.0'],
     architecture: ['Public API', 'Authentication & organization access', 'Platform services'],
     implementation: [
       'User management and public API endpoints for platform features.',
       'Organization multi-tenancy with roles and shared workspaces.',
-      'Real-time features and OAuth 2.0 integration.',
+      'Advanced permission systems and OAuth 2.0 integration.',
     ],
   },
   {
