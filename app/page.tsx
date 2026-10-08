@@ -6,10 +6,12 @@ import { Capabilities } from '@/components/capabilities';
 import { CopyEmail } from '@/components/copy-email';
 import { MagneticLink, Reveal } from '@/components/motion';
 import { profile } from '@/lib/portfolio';
+import { IntroOverlay } from '@/components/intro-overlay';
 
 // Content remains server-rendered; interactive motion is isolated in leaf components.
 export default function Home() {
   return <>
+    <IntroOverlay />
     <a className="skip-link" href="#main">Skip to content</a>
     <Header />
     <main id="main" className="home-page" tabIndex={-1}>

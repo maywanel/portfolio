@@ -23,3 +23,11 @@ References: [Motion scroll](https://motion.dev/docs/react-use-scroll), [Motion s
 ## Preserved behavior
 
 Navigation anchors, keyboard skip link, mobile navigation with Escape support, email copy feedback, printable resume, static export and GitHub Pages workflow. ft_transcendence retains its honest private/in-development status until a verified repository URL is supplied. BookLibrary links to the existing PageTurner repository.
+
+## Homepage intro
+
+The homepage opens with a fixed charcoal overlay. After 1.5 seconds, dense overlapping ink samples deform the name into the supplied `mylogo.png` over 1.8 seconds. The exact image replaces the generated silhouette at the end. Mouse movement then produces WebGL water refraction over the logo using jquery.ripples (512 resolution, 20px radius, 0.01 perturbance), matching the supplied reference. There is no visible enter button; the focused dialog announces keyboard/click instructions to assistive technology.
+
+Clicking reveals the existing page through a feathered circular mask expanding from the click position over one second, with a bright water edge. Content beyond the wave stays covered. The overlay is removed and scrolling/focus restored only after the wave finishes. Enter, Space, and Escape also dismiss it; reduced motion uses a short fade. Without JavaScript the overlay is hidden. Motion code lives in `components/intro-overlay.tsx` and `components/intro-morph.ts`; the ripple integration is isolated in `components/intro-water.ts` and loaded only after the morph. Unsupported WebGL keeps the static logo and normal dismissal.
+
+The completed wave starts a one-time hero sequence: BACKEND and the centered portrait rise together (800/1000ms), DEVELOPER rises in front of the lower torso after 850ms, and supporting copy/navigation fades in after 1650ms. The desktop copy sits below the portrait scene in two columns, stacking on mobile. Reduced motion uses a brief fade; no-JavaScript content stays visible.

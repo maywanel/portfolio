@@ -7,14 +7,18 @@ export function Hero() {
       <HeroBackdrop />
       <div className="shell hero-stage">
         <div className="hero-copy">
+          <div className="hero-identity">
           <h1 id="hero-title">Mohamed <span>El Messaadi</span></h1>
           <p className="hero-role">{profile.role}</p>
           <p className="hero-location"> {profile.location}</p>
+          </div>
+          <div className="hero-details">
           <p className="hero-description">I build backend services and low-level systems, from non-blocking C++ servers to authenticated APIs.</p>
           <div className="hero-actions flex flex-wrap items-center gap-3" aria-label="Profile and contact links">
             <MagneticLink className="button button-primary" href={`mailto:${profile.email}`}>Email me</MagneticLink>
             <MagneticLink className="button button-outline" href={profile.github}>GitHub</MagneticLink>
             <MagneticLink className="button button-outline" href={profile.resume}>Resume</MagneticLink>
+          </div>
           </div>
         </div>
         <div className="hero-side-note">

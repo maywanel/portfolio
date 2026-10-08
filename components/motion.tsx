@@ -74,8 +74,16 @@ export function HeroBackdrop() {
   const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
   const transform = useTransform(scrollYProgress, [0, 1], ['translate3d(0,0,0)', 'translate3d(-5%,90px,0)']);
   return <div className="hero-backdrop" ref={ref} aria-hidden="true">
-    <motion.div className="hero-display" style={{ transform: reduce ? 'none' : transform }}>
-      <span>BACKEND</span><span>DEVELOPER</span>
+    <motion.div className="hero-type-layer hero-type-back" style={{ transform: reduce ? 'none' : transform }}>
+      <div className="hero-word-mask"><div className="hero-display hero-backend">BACKEND</div></div>
+    </motion.div>
+    <div className="portrait-frame">
+      {/* Preserve the supplied transparent portrait at its original aspect ratio. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img className="hero-portrait" src="/me.png" alt="" width="1080" height="1448" fetchPriority="high" />
+    </div>
+    <motion.div className="hero-type-layer hero-type-front" style={{ transform: reduce ? 'none' : transform }}>
+      <div className="hero-word-mask"><div className="hero-display hero-developer">DEVELOPER</div></div>
     </motion.div>
   </div>;
 }

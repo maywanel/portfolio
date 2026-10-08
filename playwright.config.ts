@@ -1,5 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
 
+const previewURL = `http://127.0.0.1:${process.env.PORT || 3000}`;
+
 export default defineConfig({
   testDir: './tests',
   fullyParallel: true,
@@ -8,7 +10,7 @@ export default defineConfig({
   workers: process.env.CI ? 2 : 3,
   reporter: [['list']],
   use: {
-    baseURL: 'http://127.0.0.1:3000',
+    baseURL: previewURL,
     trace: 'retain-on-failure',
     launchOptions: {
       executablePath: process.env.PLAYWRIGHT_CHROMIUM_EXECUTABLE,
@@ -18,7 +20,7 @@ export default defineConfig({
   projects: [ { name: 'chromium', use: { ...devices['Desktop Chrome'] } } ],
   webServer: {
     command: 'npm start',
-    url: 'http://127.0.0.1:3000',
+    url: previewURL,
     reuseExistingServer: !process.env.CI,
     timeout: 20000,
   },
