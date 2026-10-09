@@ -39,7 +39,8 @@ p { max-width: 65ch; }
 .skip-link { position: fixed; top: 12px; left: 12px; padding: 12px 20px; background: var(--paper); color: var(--bg); z-index: 30; transform: translateY(-180%); }
 .skip-link:focus { transform: none; }
 /* Layer order: scene type 0, portrait 1, readable hero copy 2, header 10, skip link 30. */
-.site-header { position: sticky; top: 0; z-index: 10; background: rgb(17 17 16 / .95); border-bottom: 1px solid rgb(255 255 255 / .08); backdrop-filter: blur(16px); }
+.site-header { position: sticky; top: 0; z-index: 10; background: rgb(17 17 16 / .95); backdrop-filter: blur(16px); }
+.site-header.home-header { border: 0 !important; box-shadow: none !important; background: var(--bg); backdrop-filter: none; }
 .header-inner { min-height: 88px; display: flex; align-items: center; justify-content: space-between; gap: 24px; }
 .brand { display: inline-flex; min-width: 52px; min-height: 48px; align-items: center; }
 .brand-logo { display: block; height: 100px; width: auto; object-fit: contain; }
@@ -619,12 +620,12 @@ body:has(.intro-overlay) { overflow: hidden; }
 .home-page .hero-side-note > p { display: none; }
 .home-page .hero-side-note .text-link { margin: 0; }
 .hero[data-entrance='waiting'] :is(.hero-backend, .hero-developer, .hero-portrait, .hero-copy, .hero-side-note, .stats-bar),
-.home-header[data-entrance='waiting'] { opacity: 0; }
+.home-header[data-entrance='waiting'] .header-inner { opacity: 0; }
 .hero[data-entrance='playing'] .hero-backend { animation: hero-word-enter 800ms var(--ease-out) both; }
 .hero[data-entrance='playing'] .hero-portrait { animation: hero-portrait-enter 1000ms var(--ease-out) both; }
 .hero[data-entrance='playing'] .hero-developer { animation: hero-word-enter 800ms var(--ease-out) 850ms both; }
 .hero[data-entrance='playing'] :is(.hero-copy, .hero-side-note, .stats-bar),
-.home-header[data-entrance='playing'] { animation: hero-content-enter 600ms var(--ease-out) 1650ms both; }
+.home-header[data-entrance='playing'] .header-inner { animation: hero-content-enter 600ms var(--ease-out) 1650ms both; }
 .hero[data-entrance='playing'] .hero-side-note { animation-delay: 1730ms; }
 .hero[data-entrance='playing'] .stats-bar { animation-delay: 1810ms; }
 @keyframes hero-word-enter { from { opacity: 0; transform: translateY(105%); } to { opacity: 1; transform: translateY(0); } }
@@ -641,5 +642,5 @@ body:has(.intro-overlay) { overflow: hidden; }
 }
 @media (prefers-reduced-motion: reduce) {
   .hero[data-entrance='playing'] :is(.hero-backend, .hero-developer, .hero-portrait, .hero-copy, .hero-side-note, .stats-bar),
-  .home-header[data-entrance='playing'] { animation: hero-content-enter 180ms ease both; }
+  .home-header[data-entrance='playing'] .header-inner { animation: hero-content-enter 180ms ease both; }
 }

@@ -119,7 +119,7 @@ test('page and mobile navigation pass accessibility checks', async ({ page }) =>
     await page.keyboard.press('Enter');
     await expect(page.locator('.intro-overlay')).toHaveCount(0);
   const desktop = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
-  // expect(desktop.violations.map((v) => ({ id: v.id, nodes: v.nodes.map((n) => ({ target: n.target, issue: n.failureSummary })) }))).toEqual([]);
+  expect(desktop.violations.map((v) => ({ id: v.id, nodes: v.nodes.map((n) => ({ target: n.target, issue: n.failureSummary })) }))).toEqual([]);
   await page.setViewportSize({ width: 390, height: 844 });
   await page.getByRole('button', { name: 'Menu', exact: true }).click();
   const mobile = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21aa']).analyze();
