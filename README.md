@@ -32,7 +32,7 @@ Tests cover responsive layouts, visible project implementation notes, the printa
 
 ## Profile links and resume
 
-Update `lib/portfolio.ts` for contact links. `profile.linkedin` is rendered only when a confirmed URL is configured. The Resume link opens `/resume/`, a printable page generated from the same verified profile and project data; use **Print / Save as PDF** to export it. You may replace `profile.resume` with your own hosted PDF. BookLibrary links to its existing public repository, named PageTurner.
+Update `lib/portfolio.ts` for contact links. `profile.linkedin` is rendered only when a confirmed URL is configured. The Resume link opens `/resume/`, a printable page generated from the same verified profile and project data; use **Print / Save as PDF** to export it. You may replace `profile.resume` with your own hosted PDF. PageTurner links to its existing public repository, named PageTurner.
 
 ## Deployment
 

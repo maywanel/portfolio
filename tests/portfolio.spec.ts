@@ -71,7 +71,7 @@ test('project evidence is visible without expanding controls', async ({ page }) 
     await expect(page.getByRole('dialog')).toBeFocused();
     await page.keyboard.press('Enter');
     await expect(page.locator('.intro-overlay')).toHaveCount(0);
-  for (const name of ['Webserv', 'BookLibrary', 'ft_transcendence']) {
+  for (const name of ['Webserv', 'PageTurner', 'ft_transcendence']) {
     const project = page.getByRole('article').filter({ has: page.getByRole('heading', { name, exact: true }) });
     await expect(project.getByRole('heading', { name: 'Implementation' })).toBeVisible();
     await expect(project.locator('.implementation-list li')).toHaveCount(3);

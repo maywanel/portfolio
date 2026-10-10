@@ -49,7 +49,7 @@ export const projects: Project[] = [
     ],
   },
   {
-    name: 'BookLibrary',
+    name: 'PageTurner',
     category: 'Full-stack application',
     summary: 'A book library application with a Java backend, authenticated access, and dynamic book data.',
     technologies: ['Java', 'Spring Boot', 'Spring Security', 'JWT', 'Open Library API'],
@@ -91,7 +91,7 @@ export const projects: Project[] = [
 ];
 
 export const toolkit = [
-  { name: 'Languages', items: ['C', 'C++', 'Java', 'TypeScript', 'Bash', 'SQL'] },
+  { name: 'Languages', items: ['C', 'C++', 'Java', 'JavaScript', 'Bash', 'SQL'] },
   { name: 'Infrastructure & Tools', items: ['Docker', 'Kubernetes', 'Nginx', 'Linux (Arch/Omarchy)', 'Git', 'Neovim'] },
   { name: 'Frameworks', items: ['Spring Boot', 'Spring Security'] },
 ];

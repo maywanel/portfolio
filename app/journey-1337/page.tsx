@@ -31,7 +31,7 @@ const chapters = [
     body: 'Writing the code is only part of the work. Peer corrections mean explaining the implementation, testing edge cases, and confronting leaks, crashes, and broken assumptions. A fragile solution sends you back to the editor.',
     proof: 'Peer review · edge cases · accountability', lesson: 'The hard part becomes the habit: test carefully, explain clearly, and improve.' },
 ];
-const concepts = ['C', 'Memory management', 'Unix', 'Processes', 'C++', 'Concurrency', 'HTTP', 'Sockets', 'TypeScript', 'PostgreSQL', 'Docker', 'Peer review'];
+const concepts = ['C', 'Memory management', 'Unix', 'Processes', 'C++', 'Concurrency', 'HTTP', 'Sockets', 'JavaScript', 'PostgreSQL', 'Docker', 'Peer review'];
 
 export default function JourneyPage() {
   return <>

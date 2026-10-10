@@ -27,7 +27,7 @@ function ProjectDiagram({ name }: { name: string }) {
     </div>;
   }
   return <div className="project-art library-art" aria-hidden="true">
-    <div className="book-object"><Books size={138} weight="thin" /></div><div className="library-caption"><span>BookLibrary</span><span>Discover. Organize. Read.</span></div>
+    <div className="book-object"><Books size={138} weight="thin" /></div><div className="library-caption"><span>PageTurner</span><span>Discover. Organize. Read.</span></div>
   </div>;
 }
 
