@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next';
 import localFont from 'next/font/local';
 import { profile } from '@/lib/portfolio';
+import { ScrollRuler } from '@/components/scroll-ruler';
 import './globals.css';
 
 const sans = localFont({
@@ -27,5 +28,5 @@ export const metadata: Metadata = {
 export const viewport: Viewport = { themeColor: '#111110', colorScheme: 'dark' };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en" className={`${sans.variable} ${display.variable}`}><body>{children}</body></html>;
+  return <html lang="en" className={`${sans.variable} ${display.variable}`}><body id="portfolio-page">{children}<ScrollRuler /></body></html>;
 }

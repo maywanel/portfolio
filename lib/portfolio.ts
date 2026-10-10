@@ -62,6 +62,32 @@ export const projects: Project[] = [
       'Dynamic data caching integrates book information from the Open Library API.',
     ],
   },
+  {
+    name: 'cube3d',
+    category: 'Graphics & low-level programming',
+    summary: 'A first-person raycasting engine that turns a 2D map into a textured 3D view, built in C.',
+    technologies: ['C', 'MiniLibX', 'Raycasting', 'XPM textures'],
+    href: 'https://github.com/maywanel/cube3d',
+    architecture: ['Map parsing', 'Ray traversal & projection', 'Textured frame rendering'],
+    implementation: [
+      'Grid-based ray traversal projects textured walls, floors, and ceilings.',
+      'Map validation checks boundaries, player placement, and texture definitions.',
+      'Keyboard movement and camera rotation include wall collision checks.',
+    ],
+  },
+  {
+    name: 'minishell',
+    category: 'Unix systems & process management',
+    summary: 'An interactive Unix shell built in C, with command parsing, pipelines, and built-in commands.',
+    technologies: ['C', 'POSIX', 'Readline', 'Unix pipes'],
+    href: 'https://github.com/maywanel/minishell',
+    architecture: ['Tokenization & expansion', 'Command pipeline', 'Processes & file descriptors'],
+    implementation: [
+      'Tokenization and expansion prepare commands, variables, and wildcards.',
+      'Pipelines connect processes with redirections and heredoc input.',
+      'Built-in commands manage the environment, with signal and exit-status handling.',
+    ],
+  },
 ];
 
 export const toolkit = [
