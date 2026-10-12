@@ -35,7 +35,7 @@ export function ProjectList() {
   return <section id="work" className="shell section-pad section-anchor" aria-labelledby="work-title">
     <Reveal className="section-heading editorial-heading">
       <h2 id="work-title">Selected <span className="muted-heading">work.</span></h2>
-      <p>Built from first principles.<br />Designed for what comes next.</p>
+      <p>Built from first principles. Designed for what comes next.</p>
     </Reveal>
     <StackingProjects>
       {projects.map((project, index) => (

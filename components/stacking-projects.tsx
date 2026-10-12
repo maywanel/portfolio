@@ -1,17 +1,16 @@
 'use client';
 
 import { Children, useEffect, useRef, type ReactNode } from 'react';
-import { useMotionValueEvent, useScroll } from 'framer-motion';
+import { observeActivity } from './viewport-activity';
 
 type StackMetrics = { starts: number[]; tops: number[]; enabled: boolean };
 
-// Sticky handles the layout. Motion supplies a shared scroll value; geometry is
-// cached on resize, so scrolling only writes transforms (no React renders).
+// Sticky handles layout. Geometry is cached on resize; nearby scroll events
+// only write transforms, without React renders or an always-running loop.
 export function StackingProjects({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const metrics = useRef<StackMetrics>({ starts: [], tops: [], enabled: false });
   const layers = useRef<HTMLElement[]>([]);
-  const { scrollY } = useScroll();
 
   function update(scroll: number) {
     const { starts, tops, enabled } = metrics.current;
@@ -24,7 +23,6 @@ export function StackingProjects({ children }: { children: ReactNode }) {
     });
   }
 
-  useMotionValueEvent(scrollY, 'change', update);
 
   useEffect(() => {
     const stack = ref.current!;
@@ -64,7 +62,26 @@ export function StackingProjects({ children }: { children: ReactNode }) {
     items.forEach(item => observer.observe(item));
     window.addEventListener('resize', schedule);
     measure();
+    let scrollFrame = 0;
+    const onScroll = () => {
+      if (!scrollFrame) scrollFrame = requestAnimationFrame(() => {
+        scrollFrame = 0;
+        update(window.scrollY);
+      });
+    };
+    const stopActivity = observeActivity(stack, active => {
+      stack.dataset.motionActive = String(active);
+      if (active) {
+        measure();
+        window.addEventListener('scroll', onScroll, { passive: true });
+      } else {
+        window.removeEventListener('scroll', onScroll);
+        cancelAnimationFrame(scrollFrame);
+        scrollFrame = 0;
+      }
+    });
     return () => {
+      stopActivity();
       cancelAnimationFrame(frame);
       observer.disconnect();
       window.removeEventListener('resize', schedule);

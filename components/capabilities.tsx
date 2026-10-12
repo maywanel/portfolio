@@ -6,7 +6,7 @@ const icons = [BracketsCurly, TerminalWindow, Stack];
 
 export function Capabilities() {
   return <section id="skills" className="shell section-pad section-anchor" aria-labelledby="skills-title">
-    <Reveal className="section-heading editorial-heading"><h2 id="skills-title">Capabilities<br /><span className="muted-heading">&amp; tools.</span></h2><p>The languages, tools, and frameworks<br />I bring to the work.</p></Reveal>
+    <Reveal className="section-heading editorial-heading"><h2 id="skills-title">Capabilities<br /><span className="muted-heading">&amp; tools.</span></h2><p>The languages, tools, and frameworks I bring to the work.</p></Reveal>
     <div className="capabilities-grid">
       {toolkit.map((group, index) => {
         const Icon = icons[index];

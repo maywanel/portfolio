@@ -65,7 +65,6 @@ export default function JourneyPage() {
 
         <section className="journey-end shell" aria-labelledby="journey-end-title">
           <Reveal>
-            <p className="journey-kicker">THE NEXT CHAPTER</p>
             <h2 id="journey-end-title">Still learning.<br /><span>Ready to contribute.</span></h2>
             <div className="journey-end-row"><p>I’m looking for a backend internship where I can keep learning and help build dependable systems.</p><Link className="button button-primary" href={`mailto:${profile.email}`}>Get in touch <ArrowUpRight size={18} aria-hidden="true" /></Link></div>
           </Reveal>

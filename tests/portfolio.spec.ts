@@ -169,7 +169,7 @@ for (const colorScheme of ['light', 'dark'] as const) {
 }
 
 
-test('hero layered type responds to scroll with the supplied portrait', async ({ page }) => {
+test('hero layered type stays still on scroll with the supplied portrait', async ({ page }) => {
   await page.emulateMedia({ reducedMotion: 'no-preference' });
   await page.goto('/');
     await expect(page.getByRole('dialog')).toBeFocused();
@@ -179,7 +179,8 @@ test('hero layered type responds to scroll with the supplied portrait', async ({
   const backdrop = page.locator('.hero-type-back');
   const initial = await backdrop.evaluate(el => getComputedStyle(el).transform);
   await page.evaluate(() => window.scrollTo({ top: 450, behavior: 'instant' }));
-  await expect.poll(() => backdrop.evaluate(el => getComputedStyle(el).transform)).not.toBe(initial);
+  await expect(backdrop).toHaveCSS('transform', initial);
+  await expect(page.locator('.hero-type-front')).toHaveCSS('transform', 'none');
 });
 
 test('magnetic links and project tilt reset after pointer leaves', async ({ page }) => {

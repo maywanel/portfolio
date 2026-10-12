@@ -21,7 +21,7 @@ export default function Home() {
         <div className="shell about-layout">
           <Reveal><h2 id="about-title">Curiosity at<br />the <span className="muted-heading">core.</span></h2></Reveal>
           <Reveal className="about-copy">
-            <p className="about-lead">I like knowing what happens<br className="desktop-break" /> beneath the surface.</p>
+            <p className="about-lead">I like knowing what happens beneath the surface.</p>
             <p>I’m a Software Engineering Student at <strong>1337 Coding School</strong>, part of the 42 Network, in Ben Guerir, Morocco.</p>
             <p>My focus is low-level systems programming, networking, containerization, and backend architecture. I learn by building the pieces, understanding their constraints, and making them work together.</p>
             <div className="education-line"><span>1337 Coding School</span><span>October 2024 - present</span></div>

@@ -1,20 +1,11 @@
 'use client';
 
-import { useRef, type ReactNode } from 'react';
+import { useEffect, useRef, type ReactNode } from 'react';
 import {
-  motion, useMotionTemplate, useReducedMotion, useScroll, useSpring, useTransform,
-  type Variants,
+  motion, useMotionTemplate, useReducedMotion, useSpring,
 } from 'framer-motion';
+import { observeActivity } from './viewport-activity';
 
-// Shared timing keeps the entrance, hover, and scroll choreography consistent.
-export const revealVariants: Variants = {
-  rest: { opacity: 1, transform: 'translateY(0px)' },
-  enter: {
-    opacity: [0.55, 1],
-    transform: ['translateY(24px)', 'translateY(0px)'],
-    transition: { duration: 0.65, ease: [0.23, 1, 0.32, 1] },
-  },
-};
 const spring = { type: 'spring' as const, duration: 0.5, bounce: 0.2 };
 
 function finePointer() {
@@ -22,12 +13,31 @@ function finePointer() {
 }
 
 export function Reveal({ children, className = '' }: { children: ReactNode; className?: string }) {
-  const reduce = useReducedMotion();
-  // Server HTML is visible. Motion enhances it without hiding no-JS content.
-  return <motion.div className={`motion-reveal ${className}`} variants={revealVariants} initial={false}
-    whileInView={reduce ? 'rest' : 'enter'} viewport={{ once: true, amount: 0.12 }}>
-    {children}
-  </motion.div>;
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    let animation: Animation | undefined;
+    let started = false;
+    let disposed = false;
+    let active = false;
+    const stop = observeActivity(ref.current!, nearby => {
+      active = nearby;
+      if (nearby && !started) {
+        started = true;
+        // Fetch the reveal implementation only as its first section approaches.
+        void import('./section-reveal').then(({ revealSection }) => {
+          if (disposed || matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+          animation = revealSection(ref.current!);
+          if (!active) animation.pause();
+        }).catch(() => { /* Content stays visible if the enhancement cannot load. */ });
+      } else if (animation) {
+        if (matchMedia('(prefers-reduced-motion: reduce)').matches) animation.finish();
+        else if (nearby && animation.playState === 'paused') animation.play();
+        else if (!nearby && animation.playState === 'running') animation.pause();
+      }
+    }, '100px');
+    return () => { disposed = true; stop(); animation?.cancel(); };
+  }, []);
+  return <div ref={ref} className={`motion-reveal ${className}`}>{children}</div>;
 }
 
 export function MagneticLink({ children, href, className = '', onClick, label }: {
@@ -69,21 +79,17 @@ export function TiltCard({ children, className = '', labelId }: { children: Reac
 }
 
 export function HeroBackdrop() {
-  const ref = useRef<HTMLDivElement>(null);
-  const reduce = useReducedMotion();
-  const { scrollYProgress } = useScroll({ target: ref, offset: ['start start', 'end start'] });
-  const transform = useTransform(scrollYProgress, [0, 1], ['translate3d(0,0,0)', 'translate3d(-5%,90px,0)']);
-  return <div className="hero-backdrop" ref={ref} aria-hidden="true">
-    <motion.div className="hero-type-layer hero-type-back" style={{ transform: reduce ? 'none' : transform }}>
+  return <div className="hero-backdrop" aria-hidden="true">
+    <div className="hero-type-layer hero-type-back">
       <div className="hero-word-mask"><div className="hero-display hero-backend">BACKEND</div></div>
-    </motion.div>
+    </div>
     <div className="portrait-frame">
       {/* Preserve the supplied transparent portrait at its original aspect ratio. */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img className="hero-portrait" src="/me.png" alt="" width="1080" height="1448" fetchPriority="high" />
     </div>
-    <motion.div className="hero-type-layer hero-type-front" style={{ transform: reduce ? 'none' : transform }}>
+    <div className="hero-type-layer hero-type-front">
       <div className="hero-word-mask"><div className="hero-display hero-developer">DEVELOPER</div></div>
-    </motion.div>
+    </div>
   </div>;
 }

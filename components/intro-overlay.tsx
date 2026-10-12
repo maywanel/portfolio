@@ -1,11 +1,28 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { prepareIntroMorph } from './intro-morph';
-import { createIntroWater } from './intro-water';
+import type { createIntroWater } from './intro-water';
 
+
+const INTRO_SEEN_KEY = 'portfolio:intro-seen';
 
 export function IntroOverlay() {
+  const [show, setShow] = useState(false);
+  useEffect(() => {
+    // Decide before mounting the overlay or downloading its visual effects.
+    const frame = requestAnimationFrame(() => {
+      try {
+        if (localStorage.getItem(INTRO_SEEN_KEY)) return;
+        localStorage.setItem(INTRO_SEEN_KEY, 'true');
+      } catch { /* Storage may be unavailable; the introduction remains skippable. */ }
+      setShow(true);
+    });
+    return () => cancelAnimationFrame(frame);
+  }, []);
+  return show ? <FirstVisitIntro /> : null;
+}
+
+function FirstVisitIntro() {
   const [removed, setRemoved] = useState(false);
   const overlayRef = useRef<HTMLDivElement>(null);
   const waterRef = useRef<HTMLDivElement>(null);
@@ -38,7 +55,7 @@ export function IntroOverlay() {
     let disposed = false;
     let lastDrop = 0;
     const morphCanvas = overlay.querySelector<HTMLCanvasElement>('.intro-morph')!;
-    const morphReady = prepareIntroMorph(morphCanvas, overlay.querySelector('.intro-name')!, overlay.querySelector('.intro-logo')!)
+    const morphReady = (reduced.matches ? Promise.resolve(null) : import('./intro-morph').then(({ prepareIntroMorph }) => disposed || exiting ? null : prepareIntroMorph(morphCanvas, overlay.querySelector('.intro-name')!, overlay.querySelector('.intro-logo')!)))
       .then(draw => {
         if (!disposed && !exiting && draw && !reduced.matches) {
           draw(0);
@@ -49,6 +66,8 @@ export function IntroOverlay() {
     let exitTimer: ReturnType<typeof setTimeout> | undefined;
     async function startWater() {
       if (disposed || exiting || reduced.matches || water) return;
+      const { createIntroWater } = await import('./intro-water');
+      if (disposed || exiting || reduced.matches) return;
       water = await createIntroWater(waterElement!, overlay!.querySelector('.intro-logo')!, () => disposed || exiting || reduced.matches).catch(() => null);
       if (water && (disposed || exiting)) { water.destroy(); water = null; }
     }
