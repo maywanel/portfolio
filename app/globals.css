@@ -419,7 +419,7 @@ p { max-width: 65ch; }
 .journey-path-heading h2 { font-size: clamp(42px, 5vw, 72px); }
 .journey-path-heading h2 span { color: #96948c; }
 .journey-path-heading > p { color: var(--muted); margin-top: 18px; }
-.journey-path-window { overflow: hidden; margin-top: 40px; }
+.journey-path-window { overflow: hidden; margin-top: 40px; flex-shrink: 0; }
 .journey-path-track { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; width: min(1320px, calc(100% - 112px)); margin-inline: auto; }
 .journey-stage { padding: 26px 30px; border-top: 1px solid #68675e; background: var(--surface); min-width: 0; }
 .journey-stage-top { display: flex; justify-content: space-between; align-items: center; color: var(--muted); }
@@ -430,14 +430,14 @@ p { max-width: 65ch; }
 .journey-stage-lesson { margin-top: 24px; font-size: 16px; line-height: 1.5; }
 .journey-stage .journey-proof { font-size: 11px; }
 @media (min-width: 900px) {
-  .journey-path.is-horizontal .journey-path-sticky { position: sticky; top: 88px; height: calc(100svh - 88px); padding-block: 30px; display: flex; flex-direction: column; justify-content: center; }
-  .journey-path.is-horizontal .journey-path-heading h2 { font-size: clamp(38px, 4vw, 58px); }
-  .journey-path.is-horizontal .journey-path-heading h2 br { display: none; }
-  .journey-path.is-horizontal .journey-path-window { margin-top: 28px; }
-  .journey-path.is-horizontal .journey-path-track { display: flex; gap: 24px; }
-  .journey-path.is-horizontal .journey-stage { flex: 0 0 min(480px, 43vw); }
-  .journey-path.is-horizontal .journey-stage .journey-number { font-size: 48px; }
-  .journey-path.is-horizontal .journey-stage-period { margin-top: 20px; }
+  .journey-path:is(.is-horizontal, .is-measuring) .journey-path-sticky { position: sticky; top: 88px; height: calc(100svh - 88px); padding-block: 30px; display: flex; flex-direction: column; justify-content: center; }
+  .journey-path:is(.is-horizontal, .is-measuring) .journey-path-heading h2 { font-size: clamp(38px, 4vw, 58px); }
+  .journey-path:is(.is-horizontal, .is-measuring) .journey-path-heading h2 br { display: none; }
+  .journey-path:is(.is-horizontal, .is-measuring) .journey-path-window { margin-top: 28px; }
+  .journey-path:is(.is-horizontal, .is-measuring) .journey-path-track { display: flex; gap: 24px; }
+  .journey-path:is(.is-horizontal, .is-measuring) .journey-stage { flex: 0 0 min(480px, 43vw); }
+  .journey-path:is(.is-horizontal, .is-measuring) .journey-stage .journey-number { font-size: 48px; }
+  .journey-path:is(.is-horizontal, .is-measuring) .journey-stage-period { margin-top: 20px; }
 }
 @media (max-width: 899px) {
   .journey-path-track { grid-template-columns: 1fr; width: calc(100% - 48px); }
@@ -448,7 +448,7 @@ p { max-width: 65ch; }
   .journey-stage-body { margin-top: 12px; font-size: 14px; }
   .journey-stage-lesson { margin-top: 14px; font-size: 14px; }
   .journey-stage .journey-proof { margin-top: 16px; }
-  .journey-path.is-horizontal .journey-path-heading h2 { font-size: 36px; }
+  .journey-path:is(.is-horizontal, .is-measuring) .journey-path-heading h2 { font-size: 36px; }
 }
 /* Keep the journey proportionate on wide desktop viewports, including 1440p and 4K. */
 @media (min-width: 1600px) {
@@ -460,8 +460,8 @@ p { max-width: 65ch; }
   .journey-image-hero .journey-intro > p { font-size: clamp(21px, 1vw, 26px); }
   .journey-date, .journey-kicker { font-size: 12px; }
   .journey-scroll { font-size: 16px; }
-  .journey-path.is-horizontal .journey-path-track { gap: 32px; }
-  .journey-path.is-horizontal .journey-stage { flex-basis: min(640px, 30vw); }
+  .journey-path:is(.is-horizontal, .is-measuring) .journey-path-track { gap: 32px; }
+  .journey-path:is(.is-horizontal, .is-measuring) .journey-stage { flex-basis: min(640px, 30vw); }
   .journey-end-row > p { font-size: 20px; }
 }
 @media (min-width: 1600px) and (min-height: 900px) {
@@ -469,10 +469,10 @@ p { max-width: 65ch; }
   .journey-stage-body { font-size: 18px; }
   .journey-stage-lesson { font-size: 19px; }
   .journey-stage-period, .journey-stage .journey-proof { font-size: 13px; }
-  .journey-path.is-horizontal .journey-path-heading h2 { font-size: clamp(58px, 3vw, 80px); }
+  .journey-path:is(.is-horizontal, .is-measuring) .journey-path-heading h2 { font-size: clamp(58px, 3vw, 80px); }
   .journey-path-heading > p { font-size: 20px; }
-  .journey-path.is-horizontal .journey-path-window { margin-top: 40px; }
-  .journey-path.is-horizontal .journey-stage .journey-number { font-size: 64px; }
+  .journey-path:is(.is-horizontal, .is-measuring) .journey-path-window { margin-top: 40px; }
+  .journey-path:is(.is-horizontal, .is-measuring) .journey-stage .journey-number { font-size: 64px; }
 }
 @media (prefers-reduced-motion: reduce) {
   .journey-image-hero { height: auto; }
@@ -583,7 +583,7 @@ p { max-width: 65ch; }
 }
 .journey-path > .journey-tape { position: relative; top: auto; }
 @media (min-width: 900px) {
-  .journey-path.is-horizontal .journey-path-sticky {
+  .journey-path:is(.is-horizontal, .is-measuring) .journey-path-sticky {
     top: var(--path-header-height);
     height: calc(100svh - var(--path-header-height));
   }

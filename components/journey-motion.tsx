@@ -35,18 +35,42 @@ export function JourneyPath({ children, concepts }: { children: ReactNode; conce
   const scrollYProgress = useMotionValue(0);
   const transform = useTransform(() => `translate3d(${-scrollYProgress.get() * distance.get()}px,0,0)`);
   useEffect(() => {
+    const path = section.current!;
+    const rail = track.current!;
+    const panel = path.querySelector<HTMLElement>('.journey-path-sticky')!;
+    const heading = path.querySelector<HTMLElement>('.journey-path-heading')!;
+    const windowElement = path.querySelector<HTMLElement>('.journey-path-window')!;
     const measure = () => {
-      const desktop = window.matchMedia('(min-width: 900px)').matches && !reduce;
-      setHorizontal(desktop);
-      const value = desktop && track.current ? Math.max(0, track.current.scrollWidth - track.current.clientWidth) : 0;
+      let fits = false;
+      let value = 0;
+      if (window.matchMedia('(min-width: 900px)').matches && !reduce) {
+        // Measure the actual horizontal layout, including wrapped text, before
+        // choosing it. The temporary class is removed before the browser paints.
+        path.classList.add('is-measuring');
+        const panelStyle = getComputedStyle(panel);
+        const windowStyle = getComputedStyle(windowElement);
+        const requiredHeight = heading.offsetHeight + rail.offsetHeight
+          + parseFloat(windowStyle.marginTop) + parseFloat(windowStyle.marginBottom)
+          + parseFloat(panelStyle.paddingTop) + parseFloat(panelStyle.paddingBottom);
+        fits = requiredHeight <= panel.clientHeight;
+        if (fits) value = Math.max(0, rail.scrollWidth - rail.clientWidth);
+        path.classList.remove('is-measuring');
+      }
+      setHorizontal(fits);
       distance.set(value);
       setTravel(value);
     };
     measure();
     const observer = new ResizeObserver(measure);
-    if (track.current) observer.observe(track.current);
-    return () => observer.disconnect();
-  }, [distance, reduce, horizontal]);
+    observer.observe(rail);
+    observer.observe(heading);
+    for (const card of rail.children) observer.observe(card);
+    window.addEventListener('resize', measure);
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('resize', measure);
+    };
+  }, [distance, reduce]);
   useEffect(() => {
     if (!horizontal) return;
     let frame = 0;
