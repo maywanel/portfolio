@@ -645,13 +645,16 @@ body:has(.intro-overlay) { overflow: hidden; }
 .home-page .hero-side-note { position: static; display: flex; justify-content: space-between; align-items: center; gap: 24px; width: 100%; margin-top: 28px; }
 .home-page .hero-side-note > p { display: none; }
 .home-page .hero-side-note .text-link { margin: 0; }
-.hero[data-entrance='waiting'] :is(.hero-portrait, .hero-copy, .hero-side-note, .stats-bar),
+.hero[data-entrance='waiting'] :is(.hero-backend, .hero-developer, .hero-portrait, .hero-copy, .hero-side-note, .stats-bar),
 .home-header[data-entrance='waiting'] .header-inner { opacity: 0; }
+.hero[data-entrance='playing'] .hero-backend { animation: hero-word-enter 800ms var(--ease-out) both; }
+.hero[data-entrance='playing'] .hero-developer { animation: hero-word-enter 800ms var(--ease-out) 850ms both; }
 .hero[data-entrance='playing'] .hero-portrait { animation: hero-portrait-enter 1000ms var(--ease-out) both; }
 .hero[data-entrance='playing'] :is(.hero-copy, .hero-side-note, .stats-bar),
 .home-header[data-entrance='playing'] .header-inner { animation: hero-content-enter 600ms var(--ease-out) 1650ms both; }
 .hero[data-entrance='playing'] .hero-side-note { animation-delay: 1730ms; }
 .hero[data-entrance='playing'] .stats-bar { animation-delay: 1810ms; }
+@keyframes hero-word-enter { from { opacity: 0; transform: translateY(105%); } to { opacity: 1; transform: translateY(0); } }
 @keyframes hero-portrait-enter { from { opacity: 0; transform: translateY(65%); } to { opacity: 1; transform: translateY(0); } }
 @keyframes hero-content-enter { from { opacity: 0; } to { opacity: 1; } }
 @media (max-width: 700px) {
@@ -664,7 +667,7 @@ body:has(.intro-overlay) { overflow: hidden; }
   .home-page .hero-side-note { flex-wrap: wrap; gap: 8px 24px; margin-top: 20px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .hero[data-entrance='playing'] :is(.hero-portrait, .hero-copy, .hero-side-note, .stats-bar),
+  .hero[data-entrance='playing'] :is(.hero-backend, .hero-developer, .hero-portrait, .hero-copy, .hero-side-note, .stats-bar),
   .home-header[data-entrance='playing'] .header-inner { animation: hero-content-enter 180ms ease both; }
 }
 

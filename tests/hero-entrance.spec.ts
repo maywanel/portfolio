@@ -15,8 +15,10 @@ for (const width of [390, 1440]) {
     await expect(page.getByRole('dialog')).toHaveCount(0, { timeout: 1800 });
     await expect(hero).toHaveAttribute('data-entrance', 'playing');
     await expect(page.locator('.scroll-ruler')).toBeHidden();
-    await expect(page.locator('.hero-backend')).toHaveCSS('animation-name', 'none');
-    await expect(page.locator('.hero-developer')).toHaveCSS('animation-name', 'none');
+    await expect(page.locator('.hero-backend')).toHaveCSS('animation-name', 'hero-word-enter');
+    await expect(page.locator('.hero-backend')).toHaveCSS('animation-delay', '0s');
+    await expect(page.locator('.hero-developer')).toHaveCSS('animation-name', 'hero-word-enter');
+    await expect(page.locator('.hero-developer')).toHaveCSS('animation-delay', '0.85s');
     await expect(page.locator('.hero-copy')).toHaveCSS('animation-delay', '1.65s');
     await expect(page.locator('.hero-type-back')).toHaveCSS('z-index', '0');
     await expect(page.locator('.portrait-frame')).toHaveCSS('z-index', '1');
