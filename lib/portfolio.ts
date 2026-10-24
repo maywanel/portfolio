@@ -92,6 +92,6 @@ export const projects: Project[] = [
 
 export const toolkit = [
   { name: 'Languages', items: ['C', 'C++', 'Java', 'JavaScript', 'Bash', 'SQL'] },
-  { name: 'Infrastructure & Tools', items: ['Docker', 'Kubernetes', 'Nginx', 'Linux (Arch/Omarchy)', 'Git', 'Neovim'] },
-  { name: 'Frameworks', items: ['Spring Boot', 'Spring Security'] },
+  { name: 'Infrastructure & Tools', items: ['Docker', 'Nginx', 'Linux (Arch/Omarchy)', 'Git', 'Neovim'] },
+  { name: 'Frameworks', items: ['Spring Boot', 'Fastify'] },
 ];
