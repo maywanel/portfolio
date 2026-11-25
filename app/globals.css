@@ -135,7 +135,7 @@ p { max-width: 65ch; }
 .project-link { font-size: 14px; }
 .project-status { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); padding-block: 13px; }
 .project-art { position: relative; height: 285px; overflow: hidden; border-bottom: 1px solid var(--line); background: radial-gradient(ellipse at 50% 70%, #34342e, #1b1b19 72%); }
-.taskflow-art { display: grid; grid-template-rows: minmax(0, 1fr) auto; justify-items: center; gap: 12px; padding: clamp(10px, 2vw, 28px); font-variant-numeric: tabular-nums; }
+.taskflow-art { display: grid; grid-template-rows: minmax(0, 1fr); padding: clamp(10px, 2vw, 28px); }
 .taskflow-stage { width: 100%; container-type: size; display: grid; place-items: center; }
 .taskflow-frame { position: relative; width: min(100cqw, 200cqh); }
 .taskflow-frame img { display: block; width: 100%; height: auto; }

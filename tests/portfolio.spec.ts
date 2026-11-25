@@ -103,11 +103,12 @@ test('email copy succeeds and handles denied clipboard access', async ({ page, c
     await page.keyboard.press('Enter');
     await expect(page.locator('.intro-overlay')).toHaveCount(0);
   await page.getByRole('button', { name: 'Copy email', exact: true }).click();
-  await expect(page.getByRole('status')).toHaveText('Copied to clipboard.');
+  const copyStatus = page.locator('#contact').getByRole('status');
+  await expect(copyStatus).toHaveText('Copied to clipboard.');
   expect(await page.evaluate(() => navigator.clipboard.readText())).toBe('mouhamedelmessadi@gmail.com');
   await page.evaluate(() => { Object.defineProperty(navigator.clipboard, 'writeText', { value: () => Promise.reject(new Error('Denied')) }); });
   await page.getByRole('button', { name: 'Email copied', exact: true }).click();
-  await expect(page.getByRole('status')).toContainText('Use the email link instead.');
+  await expect(copyStatus).toContainText('Use the email link instead.');
   await expect(page.getByRole('link', { name: 'Email me' })).toHaveAttribute('href', 'mailto:mouhamedelmessadi@gmail.com');
 });
 

@@ -27,6 +27,6 @@ export function TaskFlowGallery() {
         <button type="button" aria-label="Next screenshot" onClick={() => move(1)}>→</button>
       </div>
     </div>
-    <span role="status" aria-atomic="true">{index + 1} / {slides.length}<span className="sr-only"> · {slides[index].alt}</span></span>
+    <span className="sr-only" role="status">{slides[index].alt}</span>
   </div>;
 }

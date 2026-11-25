@@ -93,5 +93,9 @@ for (const width of [390, 1440]) {
     await expect(image).toHaveAccessibleName('TaskFlow landing page');
     await next.press('Enter');
     await expect(image).toHaveAccessibleName(/workspace analytics/);
+    for (const name of [/team dashboard/, /landing page/, /workspace analytics/]) {
+      await next.click();
+      await expect(image).toHaveAccessibleName(name);
+    }
   });
 }
