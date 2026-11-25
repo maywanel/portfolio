@@ -23,7 +23,7 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    name: 'ft_transcendence',
+    name: 'TaskFlow',
     category: 'Backend architecture',
     status: 'In development · Private repository',
     summary: 'Backend development for a collaborative platform with organization multi-tenancy and real-time features.',

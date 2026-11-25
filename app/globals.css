@@ -135,12 +135,14 @@ p { max-width: 65ch; }
 .project-link { font-size: 14px; }
 .project-status { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); padding-block: 13px; }
 .project-art { position: relative; height: 285px; overflow: hidden; border-bottom: 1px solid var(--line); background: radial-gradient(ellipse at 50% 70%, #34342e, #1b1b19 72%); }
-.network-art > svg { position: absolute; width: 100%; height: 100%; inset: 0; stroke: #6b6b5b; stroke-width: 1; }
-.network-art .diagram-orbit { stroke: #3c3c35; stroke-dasharray: 3 5; }
-.network-node { position: absolute; display: flex; align-items: center; justify-content: center; background: #252521; border: 1px solid #555549; border-radius: 8px; padding: 12px 16px; font-size: 12px; color: #d7d4c8; }
-.node-a { top: 32%; left: 7%; }.node-b { bottom: 32%; left: 7%; }.node-c { top: 32%; right: 7%; }.node-d { bottom: 32%; right: 7%; }
-.network-core { position: absolute; inset: 0; margin: auto; width: 124px; height: 124px; display: flex; flex-direction: column; gap: 8px; align-items: center; justify-content: center; border-radius: 50%; font-size: 13px; background: linear-gradient(135deg, #555549, #22221f); border: 1px solid #79786a; }
-.art-caption { position: absolute; bottom: 36px; left: 0; right: 0; text-align: center; padding-inline: 20px; font-size: 12px; color: var(--muted); }
+.taskflow-art { display: grid; grid-template-rows: minmax(0, 1fr) auto; justify-items: center; gap: 12px; padding: clamp(10px, 2vw, 28px); font-variant-numeric: tabular-nums; }
+.taskflow-stage { width: 100%; container-type: size; display: grid; place-items: center; }
+.taskflow-frame { position: relative; width: min(100cqw, 200cqh); }
+.taskflow-frame img { display: block; width: 100%; height: auto; }
+.taskflow-stage button { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; color: var(--paper); background: color-mix(in srgb, var(--bg) 68%, transparent); border: 1px solid color-mix(in srgb, var(--paper) 40%, transparent); }
+.taskflow-stage button:first-of-type { left: 8px; }
+.taskflow-stage button:last-of-type { right: 8px; }
+.taskflow-stage button:is(:hover, :focus-visible) { background: var(--bg); }
 .server-art { display: flex; align-items: center; justify-content: center; gap: 40px; }
 .server-orbits { position: relative; width: 170px; height: 170px; display: grid; place-items: center; color: #bbb9ab; }
 .server-orbits > span { position: absolute; inset: 0; border: 1px solid #4b4b41; border-radius: 50%; transform: rotate(-25deg) scaleX(1.3); }
@@ -211,9 +213,6 @@ p { max-width: 65ch; }
   .stats-bar span { font-size: 12px; }
   .project-content { padding: 28px; }
   .project-card-featured { grid-template-columns: 1.1fr 1fr; }
-  .network-node { padding: 9px; font-size: 10px; }
-  .network-core { width: 100px; height: 100px; font-size: 11px; }
-  .node-a, .node-b { left: 4%; }.node-c, .node-d { right: 4%; }
   .server-art, .library-art { gap: 20px; }
   .server-orbits { width: 115px; height: 115px; }
   .protocol-label strong { font-size: 24px; }
@@ -234,9 +233,6 @@ p { max-width: 65ch; }
   .editorial-heading { margin-bottom: 40px; }
   .project-card-featured { display: flex; flex-direction: column; }
   .project-card-featured .project-art { height: 320px; min-height: 0; border-left: 0; border-bottom: 1px solid var(--line); }
-  .network-core { width: 120px; height: 120px; }
-  .network-node { padding: 12px 18px; font-size: 12px; }
-  .node-a, .node-b { left: 10%; }.node-c, .node-d { right: 10%; }
   .project-content { padding: 26px; }
   .project-art { height: 250px; }
   .server-art, .library-art { flex-direction: column; gap: 8px; }
@@ -285,11 +281,6 @@ p { max-width: 65ch; }
   h2 { font-size: clamp(44px, 11vw, 64px); }
   .project-content { padding: 26px 24px; }
   .project-card-featured .project-art { height: 280px; }
-  .network-core { width: 94px; height: 94px; font-size: 10px; }
-  .network-core svg { width: 26px; }
-  .network-node { padding: 8px 9px; font-size: 9px; }
-  .node-a, .node-b { left: 5%; }.node-c, .node-d { right: 5%; }
-  .art-caption { bottom: 24px; font-size: 10px; }
   .project-summary { font-size: 15px; }
   .server-art, .library-art { flex-direction: row; gap: 24px; }
   .protocol-label, .library-caption { align-items: flex-start; }
@@ -558,9 +549,6 @@ p { max-width: 65ch; }
   .home-page .tag-list li { font-size: clamp(13px, .6vw, 16px); }
   .home-page .project-art { height: clamp(320px, 18vw, 440px); }
   .home-page .project-card-featured .project-art { height: 100%; min-height: 560px; }
-  .home-page .network-node { font-size: var(--home-small-size); }
-  .home-page .network-core { width: 160px; height: 160px; font-size: 16px; }
-  .home-page .art-caption { font-size: var(--home-small-size); }
   .home-page :is(.about-layout, .contact-layout) { gap: clamp(80px, 5vw, 160px); }
   .home-page .about-copy p { font-size: var(--home-body-size); max-width: 55ch; }
   .home-page .about-copy .about-lead { font-size: clamp(32px, 1.6vw, 44px); }

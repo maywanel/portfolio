@@ -70,3 +70,28 @@ test(`tall cards stack after scrolling their content at ${viewport.width}px`, as
   await expect(stack.locator('.project-stack-layer').first()).toHaveCSS('transform', 'none');
 });
 }
+
+for (const width of [390, 1440]) {
+  test(`TaskFlow arrows overlay and cycle screenshots at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 844 });
+    await enter(page);
+    await page.locator('.project-stack').evaluate(el => el.scrollIntoView({ block: 'start', behavior: 'instant' }));
+    const gallery = page.getByRole('group', { name: 'TaskFlow screenshots' });
+    const image = gallery.getByRole('img');
+    await expect(image).toHaveAccessibleName('TaskFlow landing page');
+    const screenshot = (await image.boundingBox())!;
+    for (const button of await gallery.getByRole('button').all()) {
+      const arrow = (await button.boundingBox())!;
+      expect(arrow.x).toBeGreaterThan(screenshot.x);
+      expect(arrow.x + arrow.width).toBeLessThan(screenshot.x + screenshot.width);
+      expect(arrow.y + arrow.height / 2).toBeCloseTo(screenshot.y + screenshot.height / 2, 0);
+    }
+    await gallery.getByRole('button', { name: 'Previous screenshot' }).click();
+    await expect(image).toHaveAccessibleName(/team dashboard/);
+    const next = gallery.getByRole('button', { name: 'Next screenshot' });
+    await next.click();
+    await expect(image).toHaveAccessibleName('TaskFlow landing page');
+    await next.press('Enter');
+    await expect(image).toHaveAccessibleName(/workspace analytics/);
+  });
+}

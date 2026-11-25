@@ -22,7 +22,7 @@ References: [Motion scroll](https://motion.dev/docs/react-use-scroll), [Motion s
 
 ## Preserved behavior
 
-Navigation anchors, keyboard skip link, mobile navigation with Escape support, email copy feedback, printable resume, static export and GitHub Pages workflow. ft_transcendence retains its honest private/in-development status until a verified repository URL is supplied. BookLibrary links to the existing PageTurner repository.
+Navigation anchors, keyboard skip link, mobile navigation with Escape support, email copy feedback, printable resume, static export and GitHub Pages workflow. TaskFlow retains its honest private/in-development status until a verified repository URL is supplied. BookLibrary links to the existing PageTurner repository.
 
 ## Homepage intro
 
