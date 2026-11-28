@@ -66,36 +66,51 @@ test(`tall cards stack after scrolling their content at ${viewport.width}px`, as
   await page.evaluate(() => window.scrollBy({ top: 40, behavior: 'instant' }));
   const pinned = await items.nth(1).boundingBox();
   expect(pinned!.y).toBeCloseTo(boxes[1].top, 0);
+  const firstLayer = stack.locator('.project-stack-layer').first();
+  const opacity = () => firstLayer.evaluate(el => Number(getComputedStyle(el).opacity));
+  await expect.poll(opacity).toBe(0);
+  await page.evaluate(() => window.scrollBy({ top: -200, behavior: 'instant' }));
+  await expect.poll(opacity).toBeGreaterThan(0);
+  expect(await opacity()).toBeLessThan(1);
   await page.emulateMedia({ reducedMotion: 'reduce' });
-  await expect(stack.locator('.project-stack-layer').first()).toHaveCSS('transform', 'none');
+  await expect(firstLayer).toHaveCSS('transform', 'none');
+  await expect(firstLayer).toHaveCSS('opacity', '1');
 });
 }
 
-for (const width of [390, 1440]) {
-  test(`TaskFlow arrows overlay and cycle screenshots at ${width}px`, async ({ page }) => {
-    await page.setViewportSize({ width, height: 844 });
-    await enter(page);
-    await page.locator('.project-stack').evaluate(el => el.scrollIntoView({ block: 'start', behavior: 'instant' }));
-    const gallery = page.getByRole('group', { name: 'TaskFlow screenshots' });
-    const image = gallery.getByRole('img');
-    await expect(image).toHaveAccessibleName('TaskFlow landing page');
-    const screenshot = (await image.boundingBox())!;
-    for (const button of await gallery.getByRole('button').all()) {
-      const arrow = (await button.boundingBox())!;
-      expect(arrow.x).toBeGreaterThan(screenshot.x);
-      expect(arrow.x + arrow.width).toBeLessThan(screenshot.x + screenshot.width);
-      expect(arrow.y + arrow.height / 2).toBeCloseTo(screenshot.y + screenshot.height / 2, 0);
-    }
-    await gallery.getByRole('button', { name: 'Previous screenshot' }).click();
-    await expect(image).toHaveAccessibleName(/team dashboard/);
-    const next = gallery.getByRole('button', { name: 'Next screenshot' });
-    await next.click();
-    await expect(image).toHaveAccessibleName('TaskFlow landing page');
-    await next.press('Enter');
-    await expect(image).toHaveAccessibleName(/workspace analytics/);
-    for (const name of [/team dashboard/, /landing page/, /workspace analytics/]) {
+const screenshotNames = {
+  TaskFlow: [/landing page/, /workspace analytics/, /team dashboard/],
+  PageTurner: [/sign-in page/, /on a shelf/, /by cover/, /Book details/, /Personal library/],
+};
+
+for (const [project, slides] of Object.entries(screenshotNames)) {
+  for (const width of [390, 1440]) {
+    test(`${project} arrows overlay and cycle screenshots at ${width}px`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 844 });
+      await enter(page);
+      const card = page.getByRole('article', { name: project, exact: true });
+      await card.evaluate(el => el.scrollIntoView({ block: 'start', behavior: 'instant' }));
+      const gallery = page.getByRole('group', { name: `${project} screenshots` });
+      const image = gallery.getByRole('img');
+      await expect(image).toHaveAccessibleName(slides[0]);
+      const screenshot = (await image.boundingBox())!;
+      for (const button of await gallery.getByRole('button').all()) {
+        const arrow = (await button.boundingBox())!;
+        expect(arrow.x).toBeGreaterThan(screenshot.x);
+        expect(arrow.x + arrow.width).toBeLessThan(screenshot.x + screenshot.width);
+        expect(arrow.y + arrow.height / 2).toBeCloseTo(screenshot.y + screenshot.height / 2, 0);
+      }
+      await gallery.getByRole('button', { name: 'Previous screenshot' }).click();
+      await expect(image).toHaveAccessibleName(slides[slides.length - 1]);
+      const next = gallery.getByRole('button', { name: 'Next screenshot' });
       await next.click();
-      await expect(image).toHaveAccessibleName(name);
-    }
-  });
+      await expect(image).toHaveAccessibleName(slides[0]);
+      await next.press('Enter');
+      await expect(image).toHaveAccessibleName(slides[1]);
+      for (const name of [...slides.slice(2), slides[0], slides[1]]) {
+        await next.click();
+        await expect(image).toHaveAccessibleName(name);
+      }
+    });
+  }
 }

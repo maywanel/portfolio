@@ -40,15 +40,15 @@ export function Reveal({ children, className = '' }: { children: ReactNode; clas
   return <div ref={ref} className={`motion-reveal ${className}`}>{children}</div>;
 }
 
-export function MagneticLink({ children, href, className = '', onClick, label }: {
-  children: ReactNode; href: string; className?: string; onClick?: () => void; label?: string;
+export function MagneticLink({ children, href, className = '', onClick, label, download }: {
+  children: ReactNode; href: string; className?: string; onClick?: () => void; label?: string; download?: boolean;
 }) {
   const reduce = useReducedMotion();
   const x = useSpring(0, spring);
   const y = useSpring(0, spring);
   const transform = useMotionTemplate`translate3d(${x}px, ${y}px, 0)`;
   const reset = () => { x.set(0); y.set(0); };
-  return <motion.a href={href} className={`magnetic-link ${className}`} onClick={onClick} aria-label={label}
+  return <motion.a href={href} download={download} className={`magnetic-link ${className}`} onClick={onClick} aria-label={label}
     style={{ transform: reduce ? 'none' : transform }}
     onPointerMove={(event) => {
       if (reduce || event.pointerType !== 'mouse' || !finePointer()) return;

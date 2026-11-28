@@ -17,7 +17,7 @@ export function Hero() {
           <div className="hero-actions flex flex-wrap items-center gap-3" aria-label="Profile and contact links">
             <MagneticLink className="button button-primary" href={`mailto:${profile.email}`}>Email me</MagneticLink>
             <MagneticLink className="button button-outline" href={profile.github}>GitHub</MagneticLink>
-            <MagneticLink className="button button-outline" href={profile.resume}>Resume</MagneticLink>
+            <MagneticLink className="button button-outline" href={profile.resume} download>Resume</MagneticLink>
           </div>
           </div>
         </div>

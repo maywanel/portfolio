@@ -1,12 +1,12 @@
-import { Globe, Books, LockSimple, Cube, TerminalWindow } from '@phosphor-icons/react/dist/ssr';
-import { TaskFlowGallery } from './taskflow-gallery';
+import { Globe, LockSimple, Cube, TerminalWindow } from '@phosphor-icons/react/dist/ssr';
+import { ProjectGallery } from './project-gallery';
 import { projects } from '@/lib/portfolio';
 import { MagneticLink, Reveal, TiltCard } from './motion';
 import { StackingProjects } from './stacking-projects';
 
 function ProjectArt({ name }: { name: string }) {
-  if (name === 'TaskFlow') {
-    return <TaskFlowGallery />;
+  if (name === 'TaskFlow' || name === 'PageTurner') {
+    return <ProjectGallery name={name} />;
   }
   if (name === 'Webserv') {
     return <div className="project-art server-art" aria-hidden="true">
@@ -22,9 +22,7 @@ function ProjectArt({ name }: { name: string }) {
       <div className="protocol-label"><strong>{graphics ? 'Raycasting' : 'minishell'}</strong><span>{graphics ? 'map → rays → render' : 'parse → pipe → execute'}</span></div>
     </div>;
   }
-  return <div className="project-art library-art" aria-hidden="true">
-    <div className="book-object"><Books size={138} weight="thin" /></div><div className="library-caption"><span>PageTurner</span><span>Discover. Organize. Read.</span></div>
-  </div>;
+  return null;
 }
 
 export function ProjectList() {

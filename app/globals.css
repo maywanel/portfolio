@@ -135,14 +135,14 @@ p { max-width: 65ch; }
 .project-link { font-size: 14px; }
 .project-status { display: flex; align-items: center; gap: 8px; font-size: 13px; color: var(--muted); padding-block: 13px; }
 .project-art { position: relative; height: 285px; overflow: hidden; border-bottom: 1px solid var(--line); background: radial-gradient(ellipse at 50% 70%, #34342e, #1b1b19 72%); }
-.taskflow-art { display: grid; grid-template-rows: minmax(0, 1fr); padding: clamp(10px, 2vw, 28px); }
-.taskflow-stage { width: 100%; container-type: size; display: grid; place-items: center; }
-.taskflow-frame { position: relative; width: min(100cqw, 200cqh); }
-.taskflow-frame img { display: block; width: 100%; height: auto; }
-.taskflow-stage button { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; color: var(--paper); background: color-mix(in srgb, var(--bg) 68%, transparent); border: 1px solid color-mix(in srgb, var(--paper) 40%, transparent); }
-.taskflow-stage button:first-of-type { left: 8px; }
-.taskflow-stage button:last-of-type { right: 8px; }
-.taskflow-stage button:is(:hover, :focus-visible) { background: var(--bg); }
+.gallery-art { display: grid; grid-template-rows: minmax(0, 1fr); padding: clamp(10px, 2vw, 28px); }
+.gallery-stage { width: 100%; container-type: size; display: grid; place-items: center; }
+.gallery-frame { position: relative; }
+.gallery-frame img { display: block; width: 100%; height: auto; }
+.gallery-stage button { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; color: var(--paper); background: color-mix(in srgb, var(--bg) 68%, transparent); border: 1px solid color-mix(in srgb, var(--paper) 40%, transparent); }
+.gallery-stage button:first-of-type { left: 8px; }
+.gallery-stage button:last-of-type { right: 8px; }
+.gallery-stage button:is(:hover, :focus-visible) { background: var(--bg); }
 .server-art { display: flex; align-items: center; justify-content: center; gap: 40px; }
 .server-orbits { position: relative; width: 170px; height: 170px; display: grid; place-items: center; color: #bbb9ab; }
 .server-orbits > span { position: absolute; inset: 0; border: 1px solid #4b4b41; border-radius: 50%; transform: rotate(-25deg) scaleX(1.3); }
@@ -150,11 +150,6 @@ p { max-width: 65ch; }
 .protocol-label { display: flex; flex-direction: column; gap: 8px; }
 .protocol-label strong { font-family: var(--font-display), sans-serif; font-size: 30px; letter-spacing: -.04em; }
 .protocol-label > span { font-size: 11px; color: var(--muted); }
-.library-art { display: flex; align-items: center; justify-content: center; gap: 32px; background: radial-gradient(ellipse at 40% 90%, #383630, #1d1d1a 75%); }
-.book-object { color: #ccc6b3; transform: rotate(-9deg); }
-.library-caption { display: flex; flex-direction: column; gap: 8px; }
-.library-caption > span:first-child { font-family: var(--font-display), sans-serif; font-size: 28px; letter-spacing: -.035em; }
-.library-caption > span:last-child { color: var(--muted); font-size: 12px; }
 .about-section { padding-block: var(--section-space); border-block: 1px solid var(--line); background: #151514; }
 .about-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; }
 .about-copy p { color: var(--muted); margin-top: 24px; font-size: 16px; }
@@ -213,12 +208,10 @@ p { max-width: 65ch; }
   .stats-bar span { font-size: 12px; }
   .project-content { padding: 28px; }
   .project-card-featured { grid-template-columns: 1.1fr 1fr; }
-  .server-art, .library-art { gap: 20px; }
+  .server-art { gap: 20px; }
   .server-orbits { width: 115px; height: 115px; }
   .protocol-label strong { font-size: 24px; }
   .protocol-label > span { font-size: 9px; }
-  .book-object svg { width: 105px; }
-  .library-caption > span:first-child { font-size: 23px; }
   .about-layout, .contact-layout { gap: 48px; }
   .capability { padding: 24px; }
   .capability h3 { font-size: 19px; }
@@ -235,10 +228,9 @@ p { max-width: 65ch; }
   .project-card-featured .project-art { height: 320px; min-height: 0; border-left: 0; border-bottom: 1px solid var(--line); }
   .project-content { padding: 26px; }
   .project-art { height: 250px; }
-  .server-art, .library-art { flex-direction: column; gap: 8px; }
-  .protocol-label, .library-caption { align-items: center; }
+  .server-art { flex-direction: column; gap: 8px; }
+  .protocol-label { align-items: center; }
   .protocol-label > span { font-size: 10px; }
-  .book-object svg { height: 110px; }
   .about-layout { grid-template-columns: 1fr; gap: 40px; }
   .about-copy { max-width: 620px; }
   .desktop-break { display: none; }
@@ -282,11 +274,10 @@ p { max-width: 65ch; }
   .project-content { padding: 26px 24px; }
   .project-card-featured .project-art { height: 280px; }
   .project-summary { font-size: 15px; }
-  .server-art, .library-art { flex-direction: row; gap: 24px; }
-  .protocol-label, .library-caption { align-items: flex-start; }
+  .server-art { flex-direction: row; gap: 24px; }
+  .protocol-label { align-items: flex-start; }
   .server-orbits { width: 110px; height: 110px; }
   .protocol-label strong { font-size: 24px; }
-  .library-caption > span:first-child { font-size: 24px; }
   .capabilities-grid { gap: 14px; }
   .capability { padding: 22px; }
   .capability h3 { font-size: 18px; }
@@ -318,7 +309,7 @@ p { max-width: 65ch; }
   .contact-orb { width: 48px; height: 48px; }
   .site-footer { align-items: start; }
   .site-footer > span { max-width: 20ch; }
-  .server-art, .library-art { gap: 14px; }
+  .server-art { gap: 14px; }
   .server-orbits { width: 96px; height: 96px; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -672,11 +663,11 @@ body:has(.intro-overlay) { overflow: hidden; }
   .project-stack { gap: 24px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .project-stack-layer { transform: none !important; }
+  .project-stack-layer { transform: none !important; opacity: 1 !important; }
 }
 @media print {
   .project-stack[data-stacking="true"] .project-stack-item { position: static; }
-  .project-stack-layer { transform: none !important; }
+  .project-stack-layer { transform: none !important; opacity: 1 !important; }
 }
 
 /* Shared reading columns keep headings, introductions, and contact details aligned. */

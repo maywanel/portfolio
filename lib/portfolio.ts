@@ -5,7 +5,7 @@ export const profile = {
   email: 'mouhamedelmessadi@gmail.com',
   github: 'https://github.com/maywanel',
   linkedin: '', // Set only to a confirmed personal profile URL.
-  resume: '/resume/',
+  resume: '/Mohamed_El_Messaadi_Resume.pdf',
   location: 'Ben Guerir, Morocco',
   url: 'https://mohamedelmessaadi.tech',
 };

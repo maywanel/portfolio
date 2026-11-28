@@ -60,10 +60,14 @@ test('hero exposes role, location and working resume', async ({ page }) => {
     await expect(page.locator('.intro-overlay')).toHaveCount(0);
   await expect(page.locator('.hero')).toContainText('Backend Developer');
   await expect(page.locator('.hero')).toContainText('Ben Guerir, Morocco');
-  await page.locator('.hero').getByRole('link', { name: 'Resume', exact: true }).click();
-  await expect(page).toHaveURL(/\/resume\/$/);
-  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Mohamed El Messaadi');
-  await expect(page.getByRole('button', { name: 'Print / Save as PDF' })).toBeVisible();
+  for (const section of ['.hero', '#contact']) {
+    const pending = page.waitForEvent('download');
+    await page.locator(section).getByRole('link', { name: 'Resume', exact: true }).click();
+    const download = await pending;
+    expect(download.suggestedFilename()).toBe('Mohamed_El_Messaadi_Resume.pdf');
+    expect(await download.failure()).toBeNull();
+    await expect(page).toHaveURL('/');
+  }
 });
 
 test('project evidence is visible without expanding controls', async ({ page }) => {

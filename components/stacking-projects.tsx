@@ -6,7 +6,7 @@ import { observeActivity } from './viewport-activity';
 type StackMetrics = { starts: number[]; tops: number[]; enabled: boolean };
 
 // Sticky handles layout. Geometry is cached on resize; nearby scroll events
-// only write transforms, without React renders or an always-running loop.
+// only update the card layers, without React renders or an always-running loop.
 export function StackingProjects({ children }: { children: ReactNode }) {
   const ref = useRef<HTMLDivElement>(null);
   const metrics = useRef<StackMetrics>({ starts: [], tops: [], enabled: false });
@@ -19,6 +19,7 @@ export function StackingProjects({ children }: { children: ReactNode }) {
       const distance = next === undefined ? 0 : next - tops[index + 1] - scroll;
       const progress = enabled && next !== undefined
         ? Math.max(0, Math.min(1, 1 - distance / (starts[index + 1] - starts[index]))) : 0;
+      layer.style.opacity = String(1 - progress);
       layer.style.transform = progress ? `scale(${1 - progress * 0.025})` : 'none';
     });
   }
