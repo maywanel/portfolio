@@ -93,6 +93,11 @@ for (const [project, slides] of Object.entries(screenshotNames)) {
       const gallery = page.getByRole('group', { name: `${project} screenshots` });
       const image = gallery.getByRole('img');
       await expect(image).toHaveAccessibleName(slides[0]);
+      const arrowPositions = () => gallery.evaluate(el => Array.from(el.querySelectorAll('button'), button => {
+        const frame = button.offsetParent as HTMLElement;
+        return [frame.offsetLeft + button.offsetLeft, frame.offsetTop + button.offsetTop];
+      }));
+      const positions = await arrowPositions();
       const screenshot = (await image.boundingBox())!;
       for (const button of await gallery.getByRole('button').all()) {
         const arrow = (await button.boundingBox())!;
@@ -110,6 +115,7 @@ for (const [project, slides] of Object.entries(screenshotNames)) {
       for (const name of [...slides.slice(2), slides[0], slides[1]]) {
         await next.click();
         await expect(image).toHaveAccessibleName(name);
+        expect(await arrowPositions()).toEqual(positions);
       }
     });
   }

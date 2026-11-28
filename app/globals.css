@@ -137,8 +137,8 @@ p { max-width: 65ch; }
 .project-art { position: relative; height: 285px; overflow: hidden; border-bottom: 1px solid var(--line); background: radial-gradient(ellipse at 50% 70%, #34342e, #1b1b19 72%); }
 .gallery-art { display: grid; grid-template-rows: minmax(0, 1fr); padding: clamp(10px, 2vw, 28px); }
 .gallery-stage { width: 100%; container-type: size; display: grid; place-items: center; }
-.gallery-frame { position: relative; }
-.gallery-frame img { display: block; width: 100%; height: auto; }
+.gallery-frame { position: relative; aspect-ratio: 5 / 3; width: min(100cqw, calc(100cqh * 5 / 3)); }
+.gallery-frame img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .gallery-stage button { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; border-radius: 50%; color: var(--paper); background: color-mix(in srgb, var(--bg) 68%, transparent); border: 1px solid color-mix(in srgb, var(--paper) 40%, transparent); }
 .gallery-stage button:first-of-type { left: 8px; }
 .gallery-stage button:last-of-type { right: 8px; }

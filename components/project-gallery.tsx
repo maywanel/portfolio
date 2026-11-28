@@ -37,7 +37,7 @@ export function ProjectGallery({ name }: { name: keyof typeof galleries }) {
 
   return <div className="project-art gallery-art" role="group" aria-label={`${name} screenshots`}>
     <div className="gallery-stage">
-      <div className="gallery-frame" style={{ width: `min(100cqw, ${100 * slides[index].src.width / slides[index].src.height}cqh)` }}>
+      <div className="gallery-frame">
         <Image {...slides[index]} />
         <button type="button" aria-label="Previous screenshot" onClick={() => move(-1)}>←</button>
         <button type="button" aria-label="Next screenshot" onClick={() => move(1)}>→</button>
